@@ -32,3 +32,5 @@ from BandTinder.blueprints.loginpage.loginpage import loginpage_bp
 app.register_blueprint(mainpage_bp)
 app.register_blueprint(loginpage_bp)
 
+
+
