@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, g
 from flask_login import UserMixin, login_user, LoginManager, login_required, logout_user, current_user
 import psycopg2
 from psycopg2.extras import RealDictCursor
@@ -21,6 +21,10 @@ conn = psycopg2.connect(
 
 cur = conn.cursor(cursor_factory=RealDictCursor)
 
+@app.before_request
+def before_request():
+    g.user = current_user if current_user.is_authenticated else None
+    g.name = current_user.full_name if current_user.is_authenticated else None
 
 from BandTinder.blueprints.mainpage.mainpage import mainpage_bp
 from BandTinder.blueprints.loginpage.loginpage import loginpage_bp

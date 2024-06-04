@@ -1,3 +1,11 @@
 .hi{
     background-color:#fc03df
 }
+
+.half{
+    width: 50%
+}
+
+.ih{
+    height: 50px;
+}

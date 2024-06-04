@@ -49,7 +49,7 @@ def login():
             user = query.get_user_by_user_name(form.username.data)
             if user and bcrypt.check_password_hash(user['password'], form.password.data):
                 login_user(user, remember=True)
-                return redirect("/ll")
+                return redirect("/")
             else:
                 flash("Something Went wrong, please check username and password")
                 return redirect("/login")
@@ -62,14 +62,7 @@ def login():
 @loginpage_bp.route('/logout')
 def logout():
     logout_user()
-    return "Logged Out"
-
-@loginpage_bp.route('/ll')
-def loggedIn():
-    if not current_user.is_authenticated:
-        return "You Are not Logged In"
-
-    return "YAY"
+    return redirect("/")
 
 @loginpage_bp.route('/register', methods= ["GET", "POST"])
 def register():
@@ -82,6 +75,7 @@ def register():
         hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8') 
         name = form.fullname.data
         query.insert_user(name, username, hashed_password)
-        return redirect("/")
+        
+        return redirect("/login")
     
     return render_template("register.html", form = form)

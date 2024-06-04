@@ -5,22 +5,34 @@ Register
 {% endblock %}
 
 {% block body %}
-<h1> Please login iin now </h1>
-<form method="POST" action="">
-    {{ form.hidden_tag() }}
-    {{ form.fullname(class="") }}
-    {{ form.username }}
-    {{ form.password }}
-    {{ form.submit }}
-</form>
+<div class="vh-100 mx-auto pt-5" style="width: 30%;">
+    <p class="fs-2 text-center", style="font-family: Inter">Register Now!</p>
+    <form class="text-center" method="POST" action="">
+        {{ form.hidden_tag() }}
+        <div class="form-group ih">
+             {{ form.fullname(class="form-control") }}
+        </div>
+        <div class="form-group ih">
+             {{ form.username(class="form-control") }}
+        </div>
+        <div class="form-group ih">
+            {{ form.password(class="form-control") }}
+        </div>
+        <div class="form-group ih">
+            {{ form.submit(class="btn btn-danger") }}
+        </div>
+    </form>
+    <div>
+        {% with messages = get_flashed_messages() %}  
+            {% if messages %}  
+                {% for message in messages %}  
+                    <div class = "text-center fs-5 text-danger" style="font-family: Inter">{{ message }}</div>  
+                {% endfor %}  
+            {% endif %}  
+        {% endwith %} 
+    </div>
+    
+</div>
 
-
-{% with messages = get_flashed_messages() %}  
-    {% if messages %}  
-        {% for message in messages %}  
-            <p class = "fs-3 text-danger">{{ message }}</p>  
-        {% endfor %}  
-    {% endif %}  
-{% endwith %}  
 
 {% endblock %}
