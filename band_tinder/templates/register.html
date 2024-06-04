@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}
+Register
+{% endblock %}
+
+{% block body %}
+<h1> Please login iin now </h1>
+<form method="POST" action="">
+    {{ form.hidden_tag() }}
+    {{ form.fullname(class="") }}
+    {{ form.username }}
+    {{ form.password }}
+    {{ form.submit }}
+</form>
+
+
+{% with messages = get_flashed_messages() %}  
+    {% if messages %}  
+        {% for message in messages %}  
+            <p class = "fs-3 text-danger">{{ message }}</p>  
+        {% endfor %}  
+    {% endif %}  
+{% endwith %}  
+
+{% endblock %}

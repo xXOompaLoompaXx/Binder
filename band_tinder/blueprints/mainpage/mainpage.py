@@ -3,7 +3,7 @@ from flask import Blueprint, render_template
 from query import query
 import requests
 
-mainpage_bp = Blueprint("mainpage", __name__ , template_folder="templates")
+mainpage_bp = Blueprint("mainpage", __name__)
 
 
 
