@@ -1,6 +1,6 @@
 
 from flask import Blueprint, render_template
-from query import query
+from BandTinder.query import query
 import requests
 
 mainpage_bp = Blueprint("mainpage", __name__)
