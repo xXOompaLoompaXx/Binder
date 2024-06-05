@@ -1,16 +1,16 @@
 {% extends "base.html" %}
 
 {% block title %}
-{{g.user_name}}'s profile
 {% endblock %}
 
 {% block body %}
-<p>you are in {{g.full_name}}'s profile</p>
-<img src="static/images/binder.png" class="mx-auto d-block" style="width: 20%; margin-top: 4%;" alt="Our Band Tinder Ikon">
-<a href="youtube.com">you are allowed to redite</a>
-<img src="static/images/binder.png" class="mx-auto d-block" style="width: 20%; margin-top: 4%;" alt="Our Band Tinder Ikon">
+<p>{{g.full_name}}'s profile</p>
+<!-- <p>{{g.user_name}}</p>
+<p>your fullname is {{g.full_name}}</p> -->
+<a href="https://www.reddit.com/">Update profile</a>
+<img src="../static/images/binder.png" class="mx-auto d-block" style="width: 20%; margin-top: 4%;" alt="Our Band Tinder Ikon">
 
-<p>{{g.user_name}}</p>
-<p>{{g.full_name}}</p>
+
+
 
 {% endblock %}

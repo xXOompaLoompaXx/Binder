@@ -33,8 +33,13 @@ def get_instruments():
     SELECT * FROM Instruments
     """
     cur.execute(sql)
+    return cur.fetchall()
 
-
+def get_genres():
+    sql = """
+    SELECT * FROM Genre
+    """
+    cur.execute(sql)
     return cur.fetchall()
 
 
@@ -42,7 +47,7 @@ def get_cities():
     sql = """
     SELECT * FROM Cities
     """
+
+
     cur.execute(sql)
-
-
     return cur.fetchall()

@@ -5,50 +5,90 @@ Register
 {% endblock %}
 
 {% block body %}
-<div class="vh-100 mx-auto pt-5" style="width: 30%;">
-    <p class="fs-2 text-center", style="font-family: Inter">Register Now!</p>
-    <form class="text-center" method="POST" action="">
+<div class="form-container">
+    <h2 class="text-center">Register your account</h2>
+    <form method="POST" action="">
         {{ form.hidden_tag() }}
-        <div class="form-group ih">
-             {{ form.fullname(class="form-control") }}
+        <div class="form-group">
+            {{ form.username(class="form-control", placeholder="Username") }}
         </div>
-        <div class="form-group", style="height: 100px;">
-            {{ form.instrument.label(class="d-block text-center mb-1") }}
-            {{ form.instrument(class="form-control") }}
+        <div class="form-group">
+            {{ form.password(class="form-control", placeholder="Password") }}
         </div>
-        <div class="form-group ih", style="height: 90px">
-            {{ form.proficiency.label(class="d-block text-center mb-1") }}
+        <div class="form-group">
+            {{ form.fullname(class="form-control", placeholder="Full Name") }}
+        </div>
+        <div class="form-group">
+            {{ form.genre.label(class="d-block mb-1") }}
+            <select class="form-control placeholder-style" name="genre" id="genre">
+                <option value="" disabled selected>Select genre</option>
+                {% for value, label in form.genre.choices %}
+                <option value="{{ value }}">{{ label }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group">
+            {{ form.instrument.label(class="d-block mb-1") }}
+            <select class="form-control placeholder-style" name="instrument" id="instrument">
+                <option value="" disabled selected>Select instrument</option>
+                {% for value, label in form.instrument.choices %}
+                <option value="{{ value }}">{{ label }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group">
+            {{ form.proficiency.label(class="d-block mb-1") }}
             {{ form.proficiency(class="form-control") }}
         </div>
-        <div class="form-group", style="height: 100px;">
-            {{ form.located_in.label(class="d-block text-center mb-1") }}
-            {{ form.located_in(class="form-control") }}
+        <div class="form-group">
+            {{ form.located_in.label(class="d-block mb-1") }}
+            <select class="form-control placeholder-style" name="located_in" id="located_in">
+                <option value="" disabled selected>Select city</option>
+                {% for value, label in form.located_in.choices %}
+                <option value="{{ value }}">{{ label }}</option>
+                {% endfor %}
+            </select>
         </div>
-        <div class="form-group ih", style="height: 100px;">
-            {{ form.birthDate.label(class="d-block text-center mb-1") }}
+        <div class="form-group">
+            {{ form.birthDate.label(class="d-block mb-1") }}
             {{ form.birthDate(class="form-control") }}
         </div>
-        <div class="form-group ih">
-             {{ form.username(class="form-control") }}
-        </div>
-        <div class="form-group ih">
-            {{ form.password(class="form-control") }}
-        </div>
-        <div class="form-group ih">
-            {{ form.submit(class="btn btn-danger") }}
+        <div class="form-group text-center">
+            {{ form.submit(class="btn-submit") }}
         </div>
     </form>
-    <div>
-        {% with messages = get_flashed_messages() %}  
-            {% if messages %}  
-                {% for message in messages %}  
-                    <div class = "text-center fs-5 text-danger" style="font-family: Inter">{{ message }}</div>  
-                {% endfor %}  
-            {% endif %}  
-        {% endwith %} 
+    <div class="text-center">
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        {% for message in messages %}
+        <div class="error-message">{{ message }}</div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
     </div>
-    
 </div>
-
-
 {% endblock %}
+
+document.addEventListener('DOMContentLoaded', function() {
+    var placeholderElements = document.querySelectorAll('.placeholder-style');
+    placeholderElements.forEach(function(element) {
+        element.addEventListener('change', function() {
+            if (this.value === '') {
+                this.classList.add('placeholder-selected');
+            } else {
+                this.classList.remove('placeholder-selected');
+            }
+        });
+        element.addEventListener('focus', function() {
+            this.classList.remove('placeholder-selected');
+        });
+        element.addEventListener('blur', function() {
+            if (this.value === '') {
+                this.classList.add('placeholder-selected');
+            }
+        });
+        if (element.value === '') {
+            element.classList.add('placeholder-selected');
+        }
+    });
+});

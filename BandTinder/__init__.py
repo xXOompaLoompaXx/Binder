@@ -32,11 +32,14 @@ def before_request():
 from BandTinder.blueprints.mainpage import mainpage_bp
 from BandTinder.blueprints.loginpage import loginpage_bp
 from BandTinder.blueprints.profiles import profiles_bp
+from BandTinder.blueprints.discover import discover_bp
+from BandTinder.blueprints.matching import matching_bp
 
-
+app.register_blueprint(matching_bp)
 app.register_blueprint(profiles_bp)
 app.register_blueprint(mainpage_bp)
 app.register_blueprint(loginpage_bp)
+app.register_blueprint(discover_bp)
 
 
 

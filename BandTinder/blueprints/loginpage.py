@@ -18,17 +18,20 @@ class RegisterForm(FlaskForm):
     
 
     fullname = StringField(validators=[
-                           InputRequired(), Length(min=4, max=20, message='Form of the names is incorrect')], render_kw={"placeholder": "Your full name"})
+                           InputRequired(), Length(min=4, max=20, message='Form of the names is incorrect')], render_kw={"placeholder": "Full name"})
 
 
-    birthDate = DateField('Choose a date', format='%Y-%m-%d', validators=[DataRequired()])
+    birthDate = DateField('Insert date of birth', format='%Y-%m-%d', validators=[DataRequired()])
 
 
-    instrument = SelectField('Choose your instrument', validators=[DataRequired()])
+    instrument = SelectField('', validators=[DataRequired()], render_kw={"placeholder": "Select instrument"})
 
-    proficiency = IntegerField('Proficiency', validators=[DataRequired(), NumberRange(min=1, max=10)])
+    genre = SelectField('', validators=[DataRequired()], render_kw={"placeholder": "Select genre"})
 
-    located_in = SelectField('Choose a city', validators=[DataRequired()])
+    proficiency = IntegerField('', validators=[DataRequired(), NumberRange(min=1, max=10)], render_kw={"placeholder": "Select proficiency"})
+
+
+    located_in = SelectField('', validators=[DataRequired()], render_kw={"placeholder": "City of residence"})
 
 
     username = StringField(validators=[
@@ -79,11 +82,12 @@ def logout():
 def register():
     form = RegisterForm()
 
-
     instruments = query.get_instruments()
+    genres = query.get_genres()
     cities = query.get_cities()
-    form.instrument.choices = [(inst['instrument'], inst['instrument']) for inst in instruments]
-    form.located_in.choices = [(cit['city'], cit['city']) for cit in cities]
+    form.instrument.choices = [('', 'Select your instrument')] + [(inst['instrument'], inst['instrument']) for inst in instruments]
+    form.genre.choices = [('', 'Select your genre')] + [(genr['genre'], genr['genre']) for genr in genres]
+    form.located_in.choices = [('', 'Select your city')] + [(cit['city'], cit['city']) for cit in cities]
 
     if form.validate_on_submit():
         username = form.username.data
@@ -95,4 +99,4 @@ def register():
         query.insert_user(name, username, hashed_password, form.birthDate.data, form.located_in.data)
         return redirect("/login")
     
-    return render_template("login/register.html", form = form)
+    return render_template("login/register.html", form=form)
