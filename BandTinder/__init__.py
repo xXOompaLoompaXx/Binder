@@ -12,6 +12,7 @@ login_manager = LoginManager(app)
 login_manager.init_app(app)
 
 
+
 # Database setup
 conn = psycopg2.connect(
     host="localhost",
@@ -28,9 +29,12 @@ def before_request():
     g.user_name = current_user.user_name if current_user.is_authenticated else None
     g.full_name = current_user.full_name if current_user.is_authenticated else None
 
-from BandTinder.blueprints.mainpage.mainpage import mainpage_bp
-from BandTinder.blueprints.loginpage.loginpage import loginpage_bp
+from BandTinder.blueprints.mainpage import mainpage_bp
+from BandTinder.blueprints.loginpage import loginpage_bp
+from BandTinder.blueprints.profiles import profiles_bp
 
+
+app.register_blueprint(profiles_bp)
 app.register_blueprint(mainpage_bp)
 app.register_blueprint(loginpage_bp)
 

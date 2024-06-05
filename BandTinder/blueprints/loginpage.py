@@ -68,7 +68,7 @@ def login():
                 flash("Something Went wrong, please check username and password")
                 return redirect("/login")
                 
-    return render_template('login.html', form=form)
+    return render_template('login/login.html', form=form)
 
 @loginpage_bp.route('/logout')
 def logout():
@@ -95,4 +95,4 @@ def register():
         query.insert_user(name, username, hashed_password, form.birthDate.data, form.located_in.data)
         return redirect("/login")
     
-    return render_template("register.html", form = form)
+    return render_template("login/register.html", form = form)
