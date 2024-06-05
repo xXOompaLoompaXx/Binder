@@ -27,3 +27,22 @@ def get_user_by_user_name(user_name):
     cur.execute(sql, (user_name,))
     user = User(cur.fetchone()) if cur.rowcount > 0 else None
     return user
+
+def get_instruments():
+    sql = """
+    SELECT * FROM Instruments
+    """
+    cur.execute(sql)
+
+
+    return cur.fetchall()
+
+
+def get_cities():
+    sql = """
+    SELECT * FROM Cities
+    """
+    cur.execute(sql)
+
+
+    return cur.fetchall()

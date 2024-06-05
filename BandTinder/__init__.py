@@ -2,6 +2,7 @@ from flask import Flask, g
 from flask_login import UserMixin, login_user, LoginManager, login_required, logout_user, current_user
 import psycopg2
 from psycopg2.extras import RealDictCursor
+import os
 
 app = Flask(__name__)
 
@@ -16,7 +17,7 @@ conn = psycopg2.connect(
     host="localhost",
     database="band_tinder",
     user="postgres",
-    password="620907hyty"
+    password=os.getenv("psqlPass")
 )
 
 cur = conn.cursor(cursor_factory=RealDictCursor)

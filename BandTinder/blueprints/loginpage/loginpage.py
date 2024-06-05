@@ -3,8 +3,8 @@ import BandTinder.query as query
 import requests
 from flask_login import UserMixin, login_user, LoginManager, login_required, logout_user, current_user
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField
-from wtforms.validators import InputRequired, Length, ValidationError
+from wtforms import StringField, PasswordField, SubmitField, SelectField, DateField, IntegerField
+from wtforms.validators import InputRequired, Length, ValidationError, DataRequired, NumberRange
 from flask_bcrypt import Bcrypt
 from BandTinder import app, login_manager
 from BandTinder.models import User
@@ -15,8 +15,21 @@ loginpage_bp = Blueprint("loginpage", __name__ )
 
 
 class RegisterForm(FlaskForm):
+    
+
     fullname = StringField(validators=[
                            InputRequired(), Length(min=4, max=20, message='Form of the names is incorrect')], render_kw={"placeholder": "Your full name"})
+
+
+    # birth_date = DateField('Choose a date', format='%Y-%m-%d', validators=[DataRequired()])
+
+
+    instrument = SelectField('Choose your instrument', validators=[DataRequired()])
+
+    proficiency = IntegerField('Proficiency', validators=[DataRequired(), NumberRange(min=1, max=10)])
+
+    cities = SelectField('Choose a city', validators=[DataRequired()])
+
 
     username = StringField(validators=[
                            InputRequired(), Length(min=4, max=20, message='Form of the username is incorrect')], render_kw={"placeholder": "Username"})
@@ -44,6 +57,7 @@ def login():
             return redirect("/")
     form = LoginForm()
 
+
     if form.validate_on_submit():
         if form.validate_on_submit():
             user = query.get_user_by_user_name(form.username.data)
@@ -56,9 +70,6 @@ def login():
                 
     return render_template('login.html', form=form)
 
-            
-    return render_template('login.html', form=form)
-
 @loginpage_bp.route('/logout')
 def logout():
     logout_user()
@@ -67,6 +78,13 @@ def logout():
 @loginpage_bp.route('/register', methods= ["GET", "POST"])
 def register():
     form = RegisterForm()
+
+
+    instruments = query.get_instruments()
+    cities = query.get_cities()
+    form.instrument.choices = [(inst['instrument'], inst['instrument']) for inst in instruments]
+    form.cities.choices = [(cit['city'], cit['city']) for cit in cities]
+
     if form.validate_on_submit():
         username = form.username.data
         if query.get_user_by_user_name(username):
@@ -75,7 +93,6 @@ def register():
         hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8') 
         name = form.fullname.data
         query.insert_user(name, username, hashed_password)
-        
         return redirect("/login")
     
     return render_template("register.html", form = form)
