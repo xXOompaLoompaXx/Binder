@@ -85,9 +85,9 @@ def register():
     instruments = query.get_instruments()
     genres = query.get_genres()
     cities = query.get_cities()
-    form.instrument.choices = [('', 'Select your instrument')] + [(inst['instrument'], inst['instrument']) for inst in instruments]
-    form.genre.choices = [('', 'Select your genre')] + [(genr['genre'], genr['genre']) for genr in genres]
-    form.located_in.choices = [('', 'Select your city')] + [(cit['city'], cit['city']) for cit in cities]
+    form.instrument.choices = [(inst['instrument'], inst['instrument']) for inst in instruments]
+    form.genre.choices = [(genr['genre'], genr['genre']) for genr in genres]
+    form.located_in.choices = [(cit['city'], cit['city']) for cit in cities]
 
     if form.validate_on_submit():
         username = form.username.data
@@ -97,6 +97,7 @@ def register():
         hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8') 
         name = form.fullname.data
         query.insert_user(name, username, hashed_password, form.birthDate.data, form.located_in.data)
+        
         return redirect("/login")
     
     return render_template("login/register.html", form=form)
