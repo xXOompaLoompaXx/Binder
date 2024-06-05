@@ -15,28 +15,18 @@ Register
         <div class="form-group", style="height: 100px;">
             {{ form.instrument.label(class="d-block text-center mb-1") }}
             {{ form.instrument(class="form-control") }}
-            {% if form.instrument.errors %}
-                <ul class="text-danger">
-                {% for error in form.instrument.errors %}
-                    <li>{{ error }}</li>
-                {% endfor %}
-                </ul>
-            {% endif %}
         </div>
         <div class="form-group ih", style="height: 90px">
             {{ form.proficiency.label(class="d-block text-center mb-1") }}
             {{ form.proficiency(class="form-control") }}
         </div>
         <div class="form-group", style="height: 100px;">
-            {{ form.cities.label(class="d-block text-center mb-1") }}
-            {{ form.cities(class="form-control") }}
-            {% if form.cities.errors %}
-                <ul class="text-danger">
-                {% for error in form.cities.errors %}
-                    <li>{{ error }}</li>
-                {% endfor %}
-                </ul>
-            {% endif %}
+            {{ form.located_in.label(class="d-block text-center mb-1") }}
+            {{ form.located_in(class="form-control") }}
+        </div>
+        <div class="form-group ih", style="height: 100px;">
+            {{ form.birthDate.label(class="d-block text-center mb-1") }}
+            {{ form.birthDate(class="form-control") }}
         </div>
         <div class="form-group ih">
              {{ form.username(class="form-control") }}

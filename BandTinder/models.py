@@ -29,4 +29,6 @@ class User(ModelUserMixin):
         self.full_name = user_data.get('full_name')
         self.user_name = user_data.get('user_name')
         self.password = user_data.get('password')
+        self.birth_date = user_data.get('birth_date')
+        self.located_in = user_data.get('located_in')
 

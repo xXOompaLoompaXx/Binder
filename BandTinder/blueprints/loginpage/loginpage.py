@@ -21,14 +21,14 @@ class RegisterForm(FlaskForm):
                            InputRequired(), Length(min=4, max=20, message='Form of the names is incorrect')], render_kw={"placeholder": "Your full name"})
 
 
-    # birth_date = DateField('Choose a date', format='%Y-%m-%d', validators=[DataRequired()])
+    birthDate = DateField('Choose a date', format='%Y-%m-%d', validators=[DataRequired()])
 
 
     instrument = SelectField('Choose your instrument', validators=[DataRequired()])
 
     proficiency = IntegerField('Proficiency', validators=[DataRequired(), NumberRange(min=1, max=10)])
 
-    cities = SelectField('Choose a city', validators=[DataRequired()])
+    located_in = SelectField('Choose a city', validators=[DataRequired()])
 
 
     username = StringField(validators=[
@@ -83,7 +83,7 @@ def register():
     instruments = query.get_instruments()
     cities = query.get_cities()
     form.instrument.choices = [(inst['instrument'], inst['instrument']) for inst in instruments]
-    form.cities.choices = [(cit['city'], cit['city']) for cit in cities]
+    form.located_in.choices = [(cit['city'], cit['city']) for cit in cities]
 
     if form.validate_on_submit():
         username = form.username.data
@@ -92,7 +92,7 @@ def register():
             return redirect("/register")
         hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8') 
         name = form.fullname.data
-        query.insert_user(name, username, hashed_password)
+        query.insert_user(name, username, hashed_password, form.birthDate.data, form.located_in.data)
         return redirect("/login")
     
     return render_template("register.html", form = form)

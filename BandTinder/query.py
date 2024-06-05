@@ -11,12 +11,12 @@ def query(sql : str, vars: Any | None = None):
     conn.commit()
 
 
-def insert_user(name, username, password):
+def insert_user(name, username, password, birth_date, located_in):
     sql = """
-        INSERT INTO Users(full_name, user_name, password)
-            VALUES (%s, %s, %s)
+        INSERT INTO Users(full_name, user_name, password, birth_date, located_in)
+            VALUES (%s, %s, %s, %s, %s)
     """
-    query(sql, (name, username, password))
+    query(sql, (name, username, password, birth_date, located_in))
 
 
 def get_user_by_user_name(user_name):
