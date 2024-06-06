@@ -1,3 +1,19 @@
+-- Drop relationships first due to foreign key constraints
+DROP TABLE IF EXISTS Band_contains;
+DROP TABLE IF EXISTS Prefers_Genre;
+DROP TABLE IF EXISTS Typical_Instruments;
+DROP TABLE IF EXISTS Plays;
+
+-- Drop entities next
+DROP TABLE IF EXISTS Bands;
+DROP TABLE IF EXISTS Users;
+
+-- Drop types last
+DROP TABLE IF EXISTS Cities;
+DROP TABLE IF EXISTS Genre;
+DROP TABLE IF EXISTS Instruments;
+
+
 
 --types
 
@@ -66,26 +82,21 @@ CREATE TABLE IF NOT EXISTS Prefers_Genre
 	FOREIGN KEY (genre) REFERENCES Genre(genre)
 );
 
-CREATE TABLE IF NOT EXISTS Interested 
-	(pk INTEGER,
-	band_id INTEGER,
-	PRIMARY KEY (band_id, pk),
-	FOREIGN KEY (pk) REFERENCES Users(pk),
-	FOREIGN KEY (band_id) REFERENCES Bands(band_id)
-);
 
-
-CREATE TABLE IF NOT EXISTS Contains 
+CREATE TABLE IF NOT EXISTS Band_contains 
 	(pk INTEGER,
 	band_id INTEGER,
 	instrument varchar(50),
+	interested boolean,
 	PRIMARY KEY (band_id, pk),
 	FOREIGN KEY (pk) REFERENCES Users(pk),
 	FOREIGN KEY (band_id) REFERENCES Bands(band_id),
 	FOREIGN KEY (instrument) REFERENCES Instruments(instrument)
 );
 
-
+-- Reset sequences
+ALTER SEQUENCE users_pk_seq RESTART WITH 1;
+ALTER SEQUENCE bands_band_id_seq RESTART WITH 1;
 
 
 

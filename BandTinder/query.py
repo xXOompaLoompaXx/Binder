@@ -11,12 +11,25 @@ def query(sql : str, vars: Any | None = None):
     conn.commit()
 
 
-def insert_user(name, username, password, birth_date, located_in):
+def insert_user(name, username, password, birth_date, located_in, instrument, proficiency, genre):
     sql = """
         INSERT INTO Users(full_name, user_name, password, birth_date, located_in)
-            VALUES (%s, %s, %s, %s, %s)
+            VALUES (%s, %s, %s, %s, %s) RETURNING pk;
     """
-    query(sql, (name, username, password, birth_date, located_in))
+    cur.execute(sql, (name, username, password, birth_date, located_in))
+    conn.commit()
+    id = cur.fetchone()["pk"]
+    print(id)
+    sql = """
+        INSERT INTO Plays (pk, instrument, proficiency) VALUES
+        (%s, %s, %s);
+
+        INSERT INTO Prefers_Genre (pk, genre) VALUES
+        (%s, %s);
+    """
+    cur.execute(sql, (id, instrument, proficiency, id, genre))
+    conn.commit()
+    
 
 
 def get_user_by_user_name(user_name):
@@ -48,6 +61,13 @@ def get_cities():
     SELECT * FROM Cities
     """
 
-
     cur.execute(sql)
     return cur.fetchall()
+
+
+def getBandsWithPlayerIds(ids: list):
+    sql = """
+    SELECT band_id
+    FROM contains
+
+    """

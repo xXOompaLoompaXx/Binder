@@ -5,11 +5,12 @@ from flask_login import UserMixin, login_user, LoginManager, login_required, log
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, SelectField, DateField, IntegerField
 from wtforms.validators import InputRequired, Length, ValidationError, DataRequired, NumberRange
-from flask_bcrypt import Bcrypt
+
 from BandTinder import app, login_manager
 from BandTinder.models import User
 
-bcrypt = Bcrypt(app)
+# from flask_bcrypt import Bcrypt
+# bcrypt = Bcrypt(app)
 
 loginpage_bp = Blueprint("loginpage", __name__ )
 
@@ -64,7 +65,7 @@ def login():
     if form.validate_on_submit():
         if form.validate_on_submit():
             user = query.get_user_by_user_name(form.username.data)
-            if user and bcrypt.check_password_hash(user['password'], form.password.data):
+            if user and user['password'] == form.password.data: # bcrypt.check_password_hash(user['password'], form.password.data):
                 login_user(user, remember=True)
                 return redirect("/")
             else:
@@ -94,9 +95,9 @@ def register():
         if query.get_user_by_user_name(username):
             flash("This username exists, pick another one")
             return redirect("/register")
-        hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8') 
+        hashed_password = form.password.data # bcrypt.generate_password_hash(form.password.data).decode('utf-8') 
         name = form.fullname.data
-        query.insert_user(name, username, hashed_password, form.birthDate.data, form.located_in.data)
+        query.insert_user(name, username, hashed_password, form.birthDate.data, form.located_in.data, form.instrument.data, form.proficiency.data, form.genre.data)
         
         return redirect("/login")
     
