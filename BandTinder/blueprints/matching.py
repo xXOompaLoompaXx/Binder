@@ -8,19 +8,33 @@ matching_bp = Blueprint("matching", __name__ )
 
 
 def generate_band_for_user(pk):
-    genre = 
+    genre, user_instrument = query.get_user_genre_instrument(pk)
     
+    instruments = query.get_typical_instrument_for_genre(genre)
+    print(instruments)
+    print(user_instrument)
+    instruments.remove(user_instrument)
+
+    sql = """
+    SELECT DISTINCT *
+    FROM 
+    (SELECT pk from users where pk = {pk}, 
+    """
+    parts = []
+    for ins in instruments:
+        parts.append (f"""
+        (SELECT PG.pk
+        FROM Prefers_Genre PG, Plays P
+        WHERE PG.pk=P.pk and PG.genre='{genre}' and P.instrument='{ins}')
+        """)
+    sql += ",".join(parts)
+
+
 
 def scheduled_task():
-    for pk in query.get_all_users_pk():
-        sql = """
-            SELECT * 
-            FROM Band_contains BC, Bands
-            WHERE BC.pk = %s and Bands.band_state = 0 and Bands.band_id = BC.band_id;
-        """
-        if len(query.get_query(sql, (pk,))) < 1:
-            generate_band_for_user(pk)
-            
+    for pk in query.get_lonely_users():
+        generate_band_for_user(pk)
+        
             
 
 scheduled_task()

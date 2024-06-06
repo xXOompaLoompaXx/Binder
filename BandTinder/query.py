@@ -92,7 +92,7 @@ def get_user_genre_instrument(pk):
     SELECT genre, instrument FROM Prefers_genre PG, Plays P where PG.pk = P.pk and PG.pk = %s
     """
     cur.execute(sql, (pk, ))
-    result = cur.fetchone
+    result = cur.fetchone()
     return (result["genre"], result["instrument"])
 
 

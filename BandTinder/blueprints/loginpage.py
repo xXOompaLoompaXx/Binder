@@ -86,8 +86,8 @@ def register():
     instruments = query.get_instruments()
     genres = query.get_genres()
     cities = query.get_cities()
-    form.instrument.choices = [(inst['instrument'], inst['instrument']) for inst in instruments]
-    form.genre.choices = [(genr['genre'], genr['genre']) for genr in genres]
+    form.instrument.choices = [(inst, inst) for inst in instruments]
+    form.genre.choices = [(genr, genr) for genr in genres]
     form.located_in.choices = [(cit['city'], cit['city']) for cit in cities]
 
     if form.validate_on_submit():
@@ -95,8 +95,13 @@ def register():
         if query.get_user_class_by_user_name(username):
             flash("This username exists, pick another one")
             return redirect("/register")
+        if not form.instrument.data in query.get_typical_instrument_for_genre(form.genre.data):
+            flash("Genre and instrument incompatible") ## LIDT DÅRLIGT MEN OKAY FOR NU
+            return redirect("/register")
         hashed_password = form.password.data # bcrypt.generate_password_hash(form.password.data).decode('utf-8') 
         name = form.fullname.data
+        
+
         query.insert_user(name, username, hashed_password, form.birthDate.data, form.located_in.data, form.instrument.data, form.proficiency.data, form.genre.data)
         
         return redirect("/login")
