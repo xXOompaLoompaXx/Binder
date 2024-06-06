@@ -64,7 +64,7 @@ def login():
 
     if form.validate_on_submit():
         if form.validate_on_submit():
-            user = query.get_user_by_user_name(form.username.data)
+            user = query.get_user_class_by_user_name(form.username.data)
             if user and user['password'] == form.password.data: # bcrypt.check_password_hash(user['password'], form.password.data):
                 login_user(user, remember=True)
                 return redirect("/")
@@ -92,7 +92,7 @@ def register():
 
     if form.validate_on_submit():
         username = form.username.data
-        if query.get_user_by_user_name(username):
+        if query.get_user_class_by_user_name(username):
             flash("This username exists, pick another one")
             return redirect("/register")
         hashed_password = form.password.data # bcrypt.generate_password_hash(form.password.data).decode('utf-8') 

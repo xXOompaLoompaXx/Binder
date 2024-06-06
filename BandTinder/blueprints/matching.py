@@ -7,8 +7,21 @@ from apscheduler.schedulers.background import BackgroundScheduler
 matching_bp = Blueprint("matching", __name__ )
 
 
+def generate_band_for_user(pk):
+    genre = 
+    
+
 def scheduled_task():
-    pass
+    for pk in query.get_users():
+        sql = """
+            SELECT * 
+            FROM Band_contains BC, Bands
+            WHERE BC.pk = %s and Bands.band_state = 0 and Bands.band_id = BC.band_id;
+        """
+        if len(query.get_query(sql, (pk,))) < 1:
+            generate_band_for_user(pk)
+            
+            
 
 scheduled_task()
 scheduler = BackgroundScheduler()

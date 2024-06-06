@@ -9,6 +9,11 @@ from BandTinder import conn, cur
 def query(sql : str, vars: Any | None = None):
     cur.execute(sql, vars)
     conn.commit()
+    return cur.fetchall()
+
+def get_query(sql : str, vars: Any | None = None):
+    cur.execute(sql, vars)
+    return cur.fetchall()
 
 
 def insert_user(name, username, password, birth_date, located_in, instrument, proficiency, genre):
@@ -31,7 +36,7 @@ def insert_user(name, username, password, birth_date, located_in, instrument, pr
     
 
 
-def get_user_by_user_name(user_name):
+def get_user_class_by_user_name(user_name):
     sql = """
     SELECT * FROM Users
     WHERE user_name = %s
@@ -39,6 +44,21 @@ def get_user_by_user_name(user_name):
     cur.execute(sql, (user_name,))
     user = User(cur.fetchone()) if cur.rowcount > 0 else None
     return user
+
+def get_user(pk):
+    sql = """
+    SELECT * FROM Users WHERE pk = %s
+    """
+    cur.execute(sql, (pk,))
+    return cur.fetchall()
+
+def get_player_genre_instrument(pk):
+    sql = """
+    SELECT genre, instrument FROM Plays P, Prefers_Genre PG
+    WHERE 
+    """
+    cur.execute(sql, (pk,))
+    return cur.fetchall()
 
 def get_instruments():
     sql = """
@@ -53,6 +73,13 @@ def get_genres():
     """
     cur.execute(sql)
     return [row["genre"] for row in cur.fetchall()]
+
+def get_users():
+    sql = """
+    SELECT * FROM Users
+    """
+    cur.execute(sql)
+    return cur.fetchall()
 
 
 def get_cities():

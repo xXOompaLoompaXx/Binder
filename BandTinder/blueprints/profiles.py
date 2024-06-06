@@ -9,7 +9,7 @@ profiles_bp = Blueprint("profiles", __name__)
 
 @profiles_bp.route('/profile/<username>', methods=["GET"])
 def user_profile(username):
-    linked_user=query.get_user_by_user_name(username)
+    linked_user=query.get_user_class_by_user_name(username)
     if linked_user: 
         if current_user.is_authenticated and current_user["user_name"]==username:
             return render_template("profiles/profile.html")
