@@ -19,7 +19,6 @@ def insert_user(name, username, password, birth_date, located_in, instrument, pr
     cur.execute(sql, (name, username, password, birth_date, located_in))
     conn.commit()
     id = cur.fetchone()["pk"]
-    print(id)
     sql = """
         INSERT INTO Plays (pk, instrument, proficiency) VALUES
         (%s, %s, %s);
@@ -43,17 +42,17 @@ def get_user_by_user_name(user_name):
 
 def get_instruments():
     sql = """
-    SELECT * FROM Instruments
+    SELECT instrument FROM Instruments
     """
     cur.execute(sql)
-    return cur.fetchall()
+    return [row["instrument"] for row in cur.fetchall()]
 
 def get_genres():
     sql = """
-    SELECT * FROM Genre
+    SELECT genre FROM Genre
     """
     cur.execute(sql)
-    return cur.fetchall()
+    return [row["genre"] for row in cur.fetchall()]
 
 
 def get_cities():
@@ -65,9 +64,40 @@ def get_cities():
     return cur.fetchall()
 
 
-def getBandsWithPlayerIds(ids: list):
+def get_bands_with_player_ids(ids: list):
     sql = """
     SELECT band_id
-    FROM contains
-
+    FROM band_contains
+    WHERE pk IN %s
+    GROUP BY band_id
+    HAVING COUNT(DISTINCT pk) = %s;
     """
+    cur.execute(sql, (tuple(ids),len(ids)))
+    return [row["band_id"] for row in cur.fetchall()]
+
+def get_typical_instrument_for_genre(genre):
+    sql = """
+    SELECT instrument
+    FROM Typical_instruments
+    WHERE genre = %s
+    """
+    cur.execute(sql, (genre,))
+    return [row["instrument"] for row in cur.fetchall()]
+
+def get_users_with_prefered_genre(genre):
+    sql = """
+    SELECT pk
+    FROM Prefers_Genre
+    WHERE genre = %s
+    """
+    cur.execute(sql, (genre,))
+    return [row["pk"] for row in cur.fetchall()]
+
+def get_users_genre_instrument(genre,instrument):
+    sql = """
+    SELECT PG.pk
+    FROM Prefers_Genre PG, Plays P
+    WHERE PG.pk=P.pk and PG.genre=%s and P.instrument=%s
+    """
+    cur.execute(sql, (genre,instrument))
+    return [row["pk"] for row in cur.fetchall()]

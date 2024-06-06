@@ -1,20 +1,14 @@
 -- Insert data into Instruments
 INSERT INTO Instruments (instrument) VALUES
 ('Guitar'),
+('El-Guitar'),
 ('Drums'),
 ('Bass'),
-('Keyboard'),
+('E-Piano'),
 ('Vocals'),
-('Violin'),
-('Trumpet'),
 ('Saxophone'),
-('Flute'),
-('Cello'),
-('Harp'),
-('Clarinet'),
-('Double Bass'),
-('Trombone'),
-('Synthesizer');
+('Piano'),
+('Contra-Bass');
 
 -- Insert data into Genre
 INSERT INTO Genre (genre) VALUES
@@ -51,119 +45,77 @@ INSERT INTO Users (user_name, full_name, password, birth_date, located_in) VALUE
 ('user15', 'Michael Scott', 'password15', '1992-08-08', 'Miami');
 
 -- Insert data into Bands
-INSERT INTO Bands (band_id, band_name, band_genre, band_state, creation_date) VALUES
-(1, 'The Rockers', 'Rock', 0, '2024-06-01'),
-(2, 'Jazz Masters', 'Jazz', 1, '2024-06-02'),
-(3, 'Pop Stars', 'Pop', 2, '2024-06-03'),
-(4, 'Classical Ensemble', 'Classical', 1, '2024-06-04'),
-(5, 'Hip Hop Crew', 'Hip Hop', 0, '2024-06-05'),
-(6, 'Fusion Collective', 'Jazz', 0, '2024-06-06'),
-(7, 'Symphony Strings', 'Classical', 1, '2024-06-07'),
-(8, 'Electric Vibes', 'Pop', 0, '2024-06-08'),
-(9, 'Rhythm Riders', 'Rock', 1, '2024-06-09'),
-(10, 'Beats and Rhymes', 'Hip Hop', 2, '2024-06-10');
+-- INSERT INTO Bands (band_id, band_name, band_genre, band_state, creation_date) VALUES
+-- (1, 'The Rockers', 'Rock', 0, '2024-06-01'),
+-- (2, 'Jazz Masters', 'Jazz', 0, '2024-06-02'),
+-- (3, 'Pop Stars', 'Pop', 0, '2024-06-03'),
+-- (4, 'Classical Ensemble', 'Classical', 1, '2024-06-04'),
+-- (5, 'Hip Hop Crew', 'Hip Hop', 0, '2024-06-05'),
+-- (6, 'Fusion Collective', 'Jazz', 0, '2024-06-06'),
+-- (7, 'Symphony Strings', 'Classical', 1, '2024-06-07'),
+-- (8, 'Electric Vibes', 'Pop', 0, '2024-06-08'),
+-- (9, 'Rhythm Riders', 'Rock', 1, '2024-06-09'),
+-- (10, 'Beats and Rhymes', 'Hip Hop', 2, '2024-06-10');
 
 -- Insert data into Plays
 INSERT INTO Plays (pk, instrument, proficiency) VALUES
-(1, 'Guitar', 8),
-(2, 'Drums', 7),
-(3, 'Bass', 6),
-(4, 'Keyboard', 9),
-(5, 'Vocals', 7),
-(6, 'Violin', 8),
-(7, 'Trumpet', 6),
-(8, 'Saxophone', 7),
-(9, 'Flute', 5),
-(10, 'Cello', 8),
-(11, 'Guitar', 7),
-(12, 'Drums', 8),
-(13, 'Bass', 7),
-(14, 'Keyboard', 6),
-(15, 'Vocals', 9);
+(1, 'El-Guitar', 8),
+(2, 'E-Piano', 7),
+(3, 'Piano', 6),
+(4, 'Drums', 9),
+(5, 'Saxophone', 7),
+(6, 'Bass', 8),
+(7, 'Vocals', 6),
+(8, 'Contra-Bass', 7),
+(9, 'Guitar', 5),
+(10, 'Bass', 8),
+(11, 'Drums', 7),
+(12, 'Vocals', 8),
+(13, 'El-Guitar', 7),
+(14, 'Saxophone', 6),
+(15, 'Drums', 9);
 
 -- Insert data into Typical_Instruments
 INSERT INTO Typical_Instruments (instrument, genre) VALUES
-('Guitar', 'Rock'),
 ('Drums', 'Rock'),
+('El-Guitar', 'Rock'),
+('Vocals', 'Rock'),
 ('Bass', 'Rock'),
-('Keyboard', 'Jazz'),
+('E-Piano', 'Jazz'),
+('Contra-Bass', 'Jazz'),
 ('Saxophone', 'Jazz'),
-('Trumpet', 'Jazz'),
+('Drums', 'Jazz'),
+('Guitar', 'Pop'),
+('Piano', 'Pop'),
 ('Vocals', 'Pop'),
-('Synthesizer', 'Pop'),
 ('Drums', 'Pop'),
-('Violin', 'Classical'),
-('Cello', 'Classical'),
-('Flute', 'Classical'),
-('Vocals', 'Hip Hop'),
-('Synthesizer', 'Hip Hop'),
-('Drums', 'Hip Hop');
+('Bass', 'Pop');
+
 
 -- Insert data into Prefers_Genre
 INSERT INTO Prefers_Genre (pk, genre) VALUES
 (1, 'Rock'),
 (2, 'Jazz'),
 (3, 'Pop'),
-(4, 'Classical'),
-(5, 'Hip Hop'),
-(6, 'Classical'),
+(4, 'Rock'),
+(5, 'Jazz'),
+(6, 'Pop'),
 (7, 'Rock'),
 (8, 'Jazz'),
-(9, 'Hip Hop'),
-(10, 'Pop'),
-(11, 'Rock'),
-(12, 'Jazz'),
-(13, 'Pop'),
-(14, 'Classical'),
-(15, 'Hip Hop');
+(9, 'Pop'),
+(10, 'Rock'),
+(11, 'Jazz'),
+(12, 'Pop'),
+(13, 'Rock'),
+(14, 'Jazz'),
+(15, 'Pop');
 
 -- Insert more data into Band_contains
-INSERT INTO Band_contains (pk, band_id, instrument, interested) VALUES
-(1, 1, 'Guitar', false),
-(2, 2, 'Drums', true),
-(3, 3, 'Bass', false),
-(4, 4, 'Keyboard', true),
-(5, 5, 'Vocals', true),
-(6, 1, 'Violin', false),
-(7, 2, 'Trumpet', true),
-(8, 3, 'Saxophone', false),
-(9, 4, 'Flute', true),
-(10, 5, 'Cello', true),
-(11, 6, 'Guitar', true),
-(12, 7, 'Drums', true),
-(13, 8, 'Bass', false),
-(14, 9, 'Keyboard', true),
-(15, 10, 'Vocals', true),
-(1, 6, 'Guitar', true),
-(2, 7, 'Drums', true),
-(3, 8, 'Bass', true),
-(4, 9, 'Keyboard', true),
-(5, 10, 'Vocals', false),
-(2, 1, 'Drums', true),
-(3, 1, 'Bass', true),
-(11, 1, 'Synthesizer', true),
-(4, 2, 'Keyboard', true),
-(5, 2, 'Vocals', false),
-(12, 2, 'Saxophone', true),
-(6, 3, 'Violin', true),
-(7, 3, 'Trumpet', true),
-(14, 3, 'Synthesizer', true),
-(8, 4, 'Saxophone', true),
-(13, 4, 'Cello', true),
-(12, 5, 'Clarinet', false),
-(15, 5, 'Synthesizer', true),
-(7, 6, 'Saxophone', true),
-(9, 6, 'Flute', true),
-(13, 6, 'Cello', true),
-(8, 7, 'Drums', false),
-(10, 7, 'Harp', true),
-(14, 7, 'Synthesizer', true),
-(11, 8, 'Guitar', true),
-(12, 8, 'Drums', true),
-(15, 8, 'Vocals', true),
-(6, 9, 'Trumpet', false),
-(13, 9, 'Bass', true),
-(15, 9, 'Vocals', true),
-(1, 10, 'Guitar', true),
-(3, 10, 'Saxophone', true),
-(4, 10, 'Keyboard', false);
+-- INSERT INTO Band_contains (pk, band_id, instrument, interested) VALUES
+-- (11, 1, 'Drums', false),
+-- (14, 1, 'Drums', false),
+-- (5, 1, 'Drums', false),
+-- (2, 1, 'Drums', false),
+-- (8, 1, 'Drums', false),
+
+
