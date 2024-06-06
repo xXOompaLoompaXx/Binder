@@ -9,11 +9,11 @@ from BandTinder import conn, cur
 def query(sql : str, vars: Any | None = None):
     cur.execute(sql, vars)
     conn.commit()
-    return cur.fetchall()
 
 def get_query(sql : str, vars: Any | None = None):
     cur.execute(sql, vars)
-    return cur.fetchall()
+    result = cur.fetchall()
+    return result
 
 
 def insert_user(name, username, password, birth_date, located_in, instrument, proficiency, genre):
@@ -103,6 +103,26 @@ def get_cities():
 
     cur.execute(sql)
     return cur.fetchall()
+
+
+def make_band(name, genre, user_lst):
+    sql = """
+    INSERT INTO Bands (band_name, band_genre, band_state, creation_date) VALUES
+    (%s, %s, 0, NOW()::DATE) returning band_id
+    """
+    cur.execute(sql, (name, genre))
+    conn.commit()
+    id = cur.fetchone()["band_id"]
+    
+
+    for pk in user_lst:
+        sql = """
+        INSERT INTO Band_contains (pk, band_id) VALUES
+        (%s, %s);
+        """
+        query(sql, (pk, id))
+
+
 
 
 def get_bands_with_player_ids(ids: list):

@@ -3,43 +3,59 @@ from flask_login import UserMixin, login_user, LoginManager, login_required, log
 import BandTinder.query as query
 import requests
 from apscheduler.schedulers.background import BackgroundScheduler
+import randomname
 
 matching_bp = Blueprint("matching", __name__ )
 
 
 def generate_band_for_user(pk):
     genre, user_instrument = query.get_user_genre_instrument(pk)
-    
     instruments = query.get_typical_instrument_for_genre(genre)
-    print(instruments)
-    print(user_instrument)
     instruments.remove(user_instrument)
 
-    sql = """
-    SELECT DISTINCT *
+    names = ["pk0.pk as pk0"]
+    for i in range(len(instruments)):
+        names.append(f"pk{i + 1}.pk as pk{i + 1}")
+
+    selectNames = ", ".join(names)
+    sql = f"""
+    SELECT DISTINCT {selectNames}
     FROM 
-    (SELECT pk from users where pk = {pk}, 
+    (SELECT pk from users where pk = {pk}) pk0, 
     """
     parts = []
-    for ins in instruments:
+    for i in range(len(instruments)):
+        ins = instruments[i]
         parts.append (f"""
         (SELECT PG.pk
         FROM Prefers_Genre PG, Plays P
-        WHERE PG.pk=P.pk and PG.genre='{genre}' and P.instrument='{ins}')
+        WHERE PG.pk=P.pk and PG.genre='{genre}' and P.instrument='{ins}') pk{i + 1}
         """)
     sql += ",".join(parts)
+    combinations = query.get_query(sql)
+    print(combinations)
+    for row in combinations:
+        lst = [value for value in dict(row).values()]
+        print(lst)
+        if not query.get_bands_with_player_ids (lst):
+            #generate band with players
+            query.make_band(randomname.get_name(adj=('music_theory','speed'), noun=('fast_food', 'cats', 'music_instruments')), genre, lst)
+            return True
+    
+    return False
 
 
 
 def scheduled_task():
     for pk in query.get_lonely_users():
-        generate_band_for_user(pk)
+        print("found lonely user, making band")
+        result = generate_band_for_user(pk)
+        print(f"Band was created: {result}")
         
             
 
-scheduled_task()
 scheduler = BackgroundScheduler()
-scheduler.add_job(func=scheduled_task, trigger="interval", seconds=60)
+scheduler.add_job(func=scheduled_task, trigger="interval", seconds=10)
 scheduler.start()
 
 @matching_bp.route('/matcher')
