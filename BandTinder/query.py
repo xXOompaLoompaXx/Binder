@@ -73,6 +73,28 @@ def get_all_users_pk():
     cur.execute(sql)
     return [row["pk"] for row in cur.fetchall()]
 
+def get_lonely_users():
+    sql ="""
+    Select U.pk
+    From Users U
+    WHERE NOT EXISTS (
+        SELECT * 
+        FROM Band_contains BC, Bands
+        WHERE BC.pk = U.pk and Bands.band_state = 0 and Bands.band_id = BC.band_id
+    )
+    """
+    cur.execute(sql)
+    return [row["pk"] for row in cur.fetchall()]
+
+
+def get_user_genre_instrument(pk):
+    sql = """
+    SELECT genre, instrument FROM Prefers_genre PG, Plays P where PG.pk = P.pk and PG.pk = %s
+    """
+    cur.execute(sql, (pk, ))
+    result = cur.fetchone
+    return (result["genre"], result["instrument"])
+
 
 def get_cities():
     sql = """
