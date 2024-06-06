@@ -12,7 +12,7 @@ def generate_band_for_user(pk):
     
 
 def scheduled_task():
-    for pk in query.get_users():
+    for pk in query.get_all_users_pk():
         sql = """
             SELECT * 
             FROM Band_contains BC, Bands

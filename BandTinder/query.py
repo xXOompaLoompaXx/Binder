@@ -52,14 +52,6 @@ def get_user(pk):
     cur.execute(sql, (pk,))
     return cur.fetchall()
 
-def get_player_genre_instrument(pk):
-    sql = """
-    SELECT genre, instrument FROM Plays P, Prefers_Genre PG
-    WHERE 
-    """
-    cur.execute(sql, (pk,))
-    return cur.fetchall()
-
 def get_instruments():
     sql = """
     SELECT instrument FROM Instruments
@@ -74,12 +66,12 @@ def get_genres():
     cur.execute(sql)
     return [row["genre"] for row in cur.fetchall()]
 
-def get_users():
+def get_all_users_pk():
     sql = """
-    SELECT * FROM Users
+    SELECT pk FROM Users
     """
     cur.execute(sql)
-    return cur.fetchall()
+    return [row["pk"] for row in cur.fetchall()]
 
 
 def get_cities():
