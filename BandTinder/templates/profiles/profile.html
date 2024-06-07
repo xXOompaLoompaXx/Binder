@@ -1,16 +1,34 @@
+<!-- templates/pending.html -->
+
 {% extends "base.html" %}
 
 {% block title %}
+Pending Bands
 {% endblock %}
 
 {% block body %}
-<p>{{g.full_name}}'s profile</p>
-<!-- <p>{{g.user_name}}</p>
-<p>your fullname is {{g.full_name}}</p> -->
-<a href="https://www.reddit.com/">Update profile</a>
-<img src="../static/images/binder.png" class="mx-auto d-block" style="width: 20%; margin-top: 4%;" alt="Our Band Tinder Ikon">
-
-
-
-
+<div class="container">
+    <h2>Pending Bands</h2>
+    {% if pending_bands %}
+        <ul>
+            {% for band in pending_bands %}
+                <li>
+                    <strong>{{ band.band_name }}</strong> - {{ band.band_genre }} (Created on {{ band.creation_date }})
+                    {% if band.all_others_interested %}
+                        <form action="{{ url_for('discover.match_band', band_id=band.band_id) }}" method="post" style="display:inline;">
+                            <button type="submit" class="btn btn-success">Match</button>
+                        </form>
+                    {% else %}
+                        <button class="btn btn-secondary" disabled>Waiting for others to show interest</button>
+                    {% endif %}
+                    <form action="{{ url_for('discover.unmatch_band', band_id=band.band_id) }}" method="post" style="display:inline;">
+                        <button type="submit" class="btn btn-danger">Unmatch</button>
+                    </form>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No pending bands at the moment.</p>
+    {% endif %}
+</div>
 {% endblock %}

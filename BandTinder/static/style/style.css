@@ -1,34 +1,186 @@
-.hi{
-    background-color:#fc03df
-}
-
-.half{
-    width: 50%
-}
-
-.ih{
-    height: 50px;
-}
-
-body{
-    height: 100%;
+body {
+    font-family: 'Lato', sans-serif;
+    text-align: center;
     margin: 0;
+    overflow: hidden; /* Prevents scrolling due to pseudo-element overflow */
+}
+
+body::before, body::after {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Ensures the background is behind all other content */
+}
+
+body::before {
+    background-image: url('/static/images/background.jpg'); /* Corrected to use the relative path */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    transform: scale(1.8); /* Start more zoomed in */
+    opacity: 0;
+    animation: fadeInZoomOutBackground 25s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
+}
+
+body::after {
+    background-color: black;
+    opacity: 1;
+    animation: fadeOutBlackOverlay 5s ease-in-out forwards;
+}
+
+@keyframes fadeInZoomOutBackground {
+    0% {
+        transform: scale(1.8);
+        opacity: 0;
+    }
+    10% {
+        transform: scale(1.5);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1.0);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOutBlackOverlay {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent background for header */
+    z-index: 1; /* Ensures the header is above the background */
+}
+
+/* Navbar styling */
+nav.navbar {
+    background-color: rgba(78, 1, 1, 0.711); /* Semi-transparent background using rgba */
+    z-index: 1; /* Ensures the navbar is above the background */
+    display: flex;
+    align-items: center;
+    height: 100px; /* Increased height */
+    font-size: 1.25rem; /* Increase font size */
+}
+
+nav .container-fluid {
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+.navbar-nav {
+    display: flex;
+    align-items: center; /* Align items vertically within the navbar */
+    height: 100%;
+}
+
+.navbar-nav .nav-item {
+    display: flex;
+    align-items: center; /* Align items vertically within the nav item */
+    height: 100%; /* Ensure the nav item takes up the full height of the navbar */
+    background-color: rgba(255, 255, 255, 0.2); /* Less transparent background for nav items */
+    padding: 0 30px; /* Increased padding */
+    border-radius: 5px;
+    margin-right: 15px; /* Increased margin */
+}
+
+.navbar-nav .nav-item a.nav-link {
+    display: flex;
+    align-items: center; /* Align items vertically within the link */
+    height: 100%; /* Ensure the link takes up the full height of the nav item */
+    color: rgba(255, 255, 255, 0.962); /* Ensure the text color is visible */
+    font-size: 1.8rem; /* Ensure the text inside the boxes is larger as well */
+    letter-spacing: 1.8px;
+}
+
+
+
+.container {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    z-index: 1; /* Ensures the container is above the background */
 }
 
+.logo {
+    width: 150px;
+    height: auto;
+}
 
-/* style.css */
+.fade-in {
+    opacity: 0;
+    animation: fadeIn 3s forwards; /* Adjusted duration for slower fade-in */
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+.zoom-in {
+    transform: scale(0.8);
+    animation: zoomIn 3s forwards; /* Adjusted duration for slower zoom-in */
+}
+
+@keyframes zoomIn {
+    to {
+        transform: scale(1);
+    }
+}
+
+.logo.fade-in.zoom-in {
+    animation: fadeInZoomIn 3s forwards; /* Adjusted duration for slower fade-in and zoom-in */
+}
+
+@keyframes fadeInZoomIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.nav-link {
+    font-weight: 600;
+}
+
+.binder {
+    font-size: 2.4rem; /* Increase font size */
+    font-family: 'Pacifico', cursive; /* Change to desired font, ensure it matches your loaded fonts */
+    color: #B42424; /* Adjust color if needed */
+    text-decoration: none;
+    padding: 30px;
+    font-weight: bold;
+}
+
 
 /* Form container */
 .form-container {
-    max-width: 400px;
-    margin: 0 auto;
-    padding: 20px;
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 30px;
     border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #fff;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.9); /* Light background for form */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 /* Form input fields */
@@ -62,67 +214,11 @@ body{
     font-size: 14px;
 }
 
-
-
-.nav-link {
-    font-weight:600;
+/* Placeholder style for select elements */
+.placeholder-style {
+    color: #999;
 }
 
-a.c4:hover {
-    color: #A37B73;
+.placeholder-selected {
+    color: black; /* Change this to the desired color */
 }
-
-a.c1:hover {
-    color: #A37B73;
-}
-
-.c1 {
-    color: #B42424;
-}
-.c2 {
-    color: #DBBEA1;
-}
-.c3 {
-    color: #A37B73;
-}
-.c4 {
-    color: #3F292B;
-}
-.c5 {
-    color: #FFA547;
-}
-
-.c1b {
-    background-color: #B42424;
-}
-.c2b {
-    background-color: #DBBEA1;
-}
-.c3b {
-    background-color: #A37B73;
-}
-.c4b {
-    background-color: #3F292B;
-}
-.c5b {
-    background-color: #FFA547;
-}
-
-.b {
-    font-weight: 600;
-}
-
-p, h1, h2, h3 {
-    color: #3F292B;
-}
-
-
-
-a {
-    text-decoration: none; /* Remove underline */
-}
-
-
-
-
-

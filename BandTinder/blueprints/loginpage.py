@@ -96,7 +96,7 @@ def register():
             flash("This username exists, pick another one")
             return redirect("/register")
         if not form.instrument.data in query.get_typical_instrument_for_genre(form.genre.data):
-            flash("Genre and instrument incompatible") ## LIDT DÅRLIGT MEN OKAY FOR NU
+            flash("Genre and instrument incompatible") ## LIDT DÅRLIGT MEN OKAY FOR NU 
             return redirect("/register")
         hashed_password = form.password.data # bcrypt.generate_password_hash(form.password.data).decode('utf-8') 
         name = form.fullname.data

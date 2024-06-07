@@ -1,17 +1,15 @@
+
 from flask import Flask, g
-from flask_login import UserMixin, login_user, LoginManager, login_required, logout_user, current_user
+from flask_login import current_user, LoginManager
+import os
 import psycopg2
 from psycopg2.extras import RealDictCursor
-import os
 
 app = Flask(__name__)
-
-app.config['SECRET_KEY'] = "asdasdasdos.getenv('asdSECasdasdasdRasdET_KEYasd')"
+app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'mysecretkey')
 
 login_manager = LoginManager(app)
 login_manager.init_app(app)
-
-
 
 # Database setup
 conn = psycopg2.connect(
@@ -20,7 +18,6 @@ conn = psycopg2.connect(
     user="postgres",
     password=os.getenv("psqlPass")
 )
-
 cur = conn.cursor(cursor_factory=RealDictCursor)
 
 @app.before_request
@@ -36,14 +33,9 @@ from BandTinder.blueprints.matching import matching_bp
 from BandTinder.blueprints.discover import discover_bp
 from BandTinder.blueprints.browse import browse_bp
 
-
 app.register_blueprint(browse_bp)
 app.register_blueprint(discover_bp)
 app.register_blueprint(matching_bp)
 app.register_blueprint(profiles_bp)
 app.register_blueprint(mainpage_bp)
 app.register_blueprint(loginpage_bp)
-
-
-
-
