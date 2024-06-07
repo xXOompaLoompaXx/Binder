@@ -1,11 +1,30 @@
+<!-- templates/discover.html -->
+
 {% extends "base.html" %}
 
 {% block title %}
-Index
+Discover Bands
 {% endblock %}
 
 {% block body %}
-<h1 class="text-center">WELCOME TO THE DISCOVER PAGE</h1>
-
-
+<div class="container">
+    <h2>Discover Bands</h2>
+    {% if matched_bands %}
+        <ul>
+            {% for band in matched_bands %}
+                <li>
+                    <strong>{{ band.band_name }}</strong> - {{ band.band_genre }} (Created on {{ band.creation_date }})
+                    <form action="{{ url_for('discover.confirm_interest', band_id=band.band_id) }}" method="post" style="display:inline;">
+                        <button type="submit" class="btn btn-success">Interested</button>
+                    </form>
+                    <form action="{{ url_for('discover.decline_interest', band_id=band.band_id) }}" method="post" style="display:inline;">
+                        <button type="submit" class="btn btn-danger">Not Interested</button>
+                    </form>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No new bands to discover at the moment.</p>
+    {% endif %}
+</div>
 {% endblock %}

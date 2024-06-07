@@ -1,3 +1,5 @@
+-- add_data.sql
+
 -- Insert data into Instruments
 INSERT INTO Instruments (instrument) VALUES
 ('Guitar'),
@@ -44,19 +46,6 @@ INSERT INTO Users (user_name, full_name, password, birth_date, located_in) VALUE
 ('user14', 'Laura Martinez', 'password14', '1989-04-04', 'Houston'),
 ('user15', 'Michael Scott', 'password15', '1992-08-08', 'Miami');
 
--- Insert data into Bands
--- INSERT INTO Bands (band_id, band_name, band_genre, band_state, creation_date) VALUES
--- (1, 'The Rockers', 'Rock', 0, '2024-06-01'),
--- (2, 'Jazz Masters', 'Jazz', 0, '2024-06-02'),
--- (3, 'Pop Stars', 'Pop', 0, '2024-06-03'),
--- (4, 'Classical Ensemble', 'Classical', 1, '2024-06-04'),
--- (5, 'Hip Hop Crew', 'Hip Hop', 0, '2024-06-05'),
--- (6, 'Fusion Collective', 'Jazz', 0, '2024-06-06'),
--- (7, 'Symphony Strings', 'Classical', 1, '2024-06-07'),
--- (8, 'Electric Vibes', 'Pop', 0, '2024-06-08'),
--- (9, 'Rhythm Riders', 'Rock', 1, '2024-06-09'),
--- (10, 'Beats and Rhymes', 'Hip Hop', 2, '2024-06-10');
-
 -- Insert data into Plays
 INSERT INTO Plays (pk, instrument, proficiency) VALUES
 (1, 'El-Guitar', 8),
@@ -91,7 +80,6 @@ INSERT INTO Typical_Instruments (instrument, genre) VALUES
 ('Drums', 'Pop'),
 ('Bass', 'Pop');
 
-
 -- Insert data into Prefers_Genre
 INSERT INTO Prefers_Genre (pk, genre) VALUES
 (1, 'Rock'),
@@ -109,13 +97,3 @@ INSERT INTO Prefers_Genre (pk, genre) VALUES
 (13, 'Rock'),
 (14, 'Jazz'),
 (15, 'Pop');
-
--- Insert more data into Band_contains
--- INSERT INTO Band_contains (pk, band_id, instrument, interested) VALUES
--- (11, 1, 'Drums', false),
--- (14, 1, 'Drums', false),
--- (5, 1, 'Drums', false),
--- (2, 1, 'Drums', false),
--- (8, 1, 'Drums', false),
-
-

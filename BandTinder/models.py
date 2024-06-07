@@ -1,9 +1,7 @@
 from typing import Dict
-
 from flask_login import UserMixin
 from psycopg2 import sql
-
-from BandTinder import login_manager, app, conn, cur
+from BandTinder import login_manager, conn, cur
 
 
 class ModelUserMixin(dict, UserMixin):
@@ -11,15 +9,16 @@ class ModelUserMixin(dict, UserMixin):
     def id(self):
         return self.pk
 
+
 @login_manager.user_loader
 def load_user(user_id):
     user_sql = sql.SQL("""
     SELECT * FROM Users
     WHERE pk = %s
-    """).format(sql.Identifier('pk'))
-
+    """)
     cur.execute(user_sql, (int(user_id),))
-    return User(cur.fetchone()) if cur.rowcount > 0 else None
+    user_data = cur.fetchone()
+    return User(user_data) if user_data else None
 
 
 class User(ModelUserMixin):
@@ -31,4 +30,3 @@ class User(ModelUserMixin):
         self.password = user_data.get('password')
         self.birth_date = user_data.get('birth_date')
         self.located_in = user_data.get('located_in')
-
