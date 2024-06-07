@@ -24,11 +24,7 @@ def decline_interest(band_id):
     query.set_user_interest(current_user.id, band_id, False)
     return redirect(url_for('discover.discover'))
 
-@discover_bp.route('/pending')
-@login_required
-def pending_bands():
-    pending_bands = query.get_pending_bands(current_user.id)
-    return render_template('pending.html', pending_bands=pending_bands)
+
 
 @discover_bp.route('/match_band/<int:band_id>', methods=["POST"])
 @login_required
@@ -40,8 +36,4 @@ def match_band(band_id):
         flash("Not all other users have shown interest yet.")
     return redirect(url_for('discover.pending_bands'))
 
-@discover_bp.route('/unmatch_band/<int:band_id>', methods=["POST"])
-@login_required
-def unmatch_band(band_id):
-    query.finalize_band(current_user.id, band_id, False)
-    return redirect(url_for('discover.pending_bands'))
+
