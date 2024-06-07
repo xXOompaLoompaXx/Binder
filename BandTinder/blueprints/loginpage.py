@@ -5,7 +5,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, SelectField, DateField, IntegerField
 from wtforms.validators import InputRequired, Length, ValidationError, DataRequired, NumberRange
 from BandTinder.models import User
-from werkzeug.security import generate_password_hash, check_password_hash
+# from werkzeug.security import generate_password_hash, check_password_hash
 
 loginpage_bp = Blueprint("loginpage", __name__)
 
@@ -33,7 +33,7 @@ def login():
 
     if form.validate_on_submit():
         user = query.get_user_class_by_user_name(form.username.data)
-        if user and check_password_hash(user['password'], form.password.data):
+        if user and user['password'] == form.password.data: # check_password_hash(user['password'], form.password.data):
             login_user(user, remember=True)
             return redirect("/")
         else:
@@ -66,7 +66,7 @@ def register():
             flash("Genre and instrument incompatible")
             return redirect("/register")
 
-        hashed_password = generate_password_hash(form.password.data)
+        hashed_password = form.data.password # generate_password_hash(form.password.data)
         name = form.fullname.data
 
         try:
