@@ -118,7 +118,7 @@ def make_band(name, genre, user_lst):
     for pk in user_lst:
         sql = """
         INSERT INTO Band_contains (pk, band_id, interested) VALUES
-        (%s, %s, FALSE);
+        (%s, %s, NULL);
         """
         query(sql, (pk, band_id))
 
@@ -159,8 +159,7 @@ def get_users_with_prefered_genre(genre):
 def get_bands_by_user(user_id):
     sql = """
     SELECT B.band_id, B.band_name, B.band_genre, B.creation_date
-    FROM Bands B
-    JOIN Band_contains BC ON B.band_id = BC.band_id
+    FROM Bands B NATURAL JOIN Band_contains BC
     WHERE BC.pk = %s AND B.band_state = 1
     """
     cur.execute(sql, (user_id,))
@@ -185,14 +184,48 @@ def set_user_interest(user_id, band_id, match_status):
     cur.execute(sql, (match_status, user_id, band_id))
     conn.commit()
 
-def get_matched_bands(user_id):
+
+
+def set_band_state(band_id, band_state):
+    sql = """
+    UPDATE Bands
+    SET band_state = %s
+    WHERE band_id = %s
+    """
+    cur.execute(sql, (band_state, band_id))
+    conn.commit()
+
+def bands_that_have_all_users_interested(): #Finds all the bands that are matched and neeeds to be set to 1
     sql = """
     SELECT B.band_id
 	FROM BANDS B
     WHERE NOT EXISTS (
-        SELECT 1 FROM Band_contains BC
+        SELECT * FROM Band_contains BC
         WHERE BC.band_id = B.band_id AND (BC.interested = FALSE OR BC.interested IS NULL)
     )
     """
-    cur.execute(sql, (user_id,))
+    cur.execute(sql)
+    return cur.fetchall()
+
+
+
+def get_unanswered_bands(user_id):
+    sql = """
+    SELECT BC.band_id, B.band_name, B.band_genre, B.creation_date
+    FROM users u NATURAL JOIN Band_contains BC NATURAL JOIN bands B
+    WHERE u.pk=%s and BC.interested IS NULL
+    """
+    cur.execute(sql,(user_id,))
+    return cur.fetchall()
+
+
+def get_band_players(band_id):
+    sql = """
+        SELECT u.user_name, u.full_name, u.pk, p.instrument
+        FROM band_contains bc 
+        JOIN Users u on u.pk = bc.pk 
+        JOIN plays p on p.pk = u.pk
+        WHERE bc.band_id = %s
+    """
+    cur.execute(sql,(band_id,))
     return cur.fetchall()

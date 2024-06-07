@@ -78,12 +78,10 @@ CREATE TABLE IF NOT EXISTS Prefers_Genre
 CREATE TABLE IF NOT EXISTS Band_contains 
     (pk INTEGER,
     band_id INTEGER,
-    instrument varchar(50),
     interested BOOLEAN DEFAULT FALSE,
     PRIMARY KEY (band_id, pk),
     FOREIGN KEY (pk) REFERENCES Users(pk),
-    FOREIGN KEY (band_id) REFERENCES Bands(band_id),
-    FOREIGN KEY (instrument) REFERENCES Instruments(instrument)
+    FOREIGN KEY (band_id) REFERENCES Bands(band_id)
 );
 
 -- Reset sequences

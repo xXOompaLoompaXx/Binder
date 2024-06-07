@@ -33,13 +33,12 @@ def generate_band_for_user(pk):
         """)
     sql += ",".join(parts)
     combinations = query.get_query(sql)
-    print(combinations)
+
     for row in combinations:
         lst = [value for value in dict(row).values()]
-        print(lst)
         if not query.get_bands_with_player_ids (lst):
             #generate band with players
-            query.make_band(randomname.get_name(adj=('music_theory','speed'), noun=('fast_food', 'cats', 'music_instruments')), genre, lst)
+            query.make_band((randomname.get_name(adj=('shape','weather','emotions','speed'), noun=('music_instruments')))+'s', genre, lst)
             return True
     
     return False
@@ -47,8 +46,11 @@ def generate_band_for_user(pk):
 
 
 def scheduled_task():
-    for pk in query.get_lonely_users():
+    loners =  query.get_lonely_users()
+    print(len(loners))
+    for pk in loners:
         print("found lonely user, making band")
+        print(pk)
         result = generate_band_for_user(pk)
         print(f"Band was created: {result}")
         

@@ -10,8 +10,15 @@ discover_bp = Blueprint("discover", __name__)
 @login_required
 def discover():
     #Pick random band, then display it.
-    matched_bands = []
-    return render_template('discover.html', matched_bands=matched_bands)
+    pk = current_user.pk
+    unanswered_bands = query.get_unanswered_bands(pk)
+    if len(unanswered_bands) > 0:
+        band = unanswered_bands[0]
+        players = query.get_band_players(band["band_id"])
+    else:
+        band = None
+        players = None
+    return render_template('discover.html', band=band, players = players)
 
 @discover_bp.route('/confirm_interest/<int:band_id>', methods=["POST"])
 @login_required
@@ -23,6 +30,7 @@ def confirm_interest(band_id):
 @login_required
 def decline_interest(band_id):
     query.set_user_interest(current_user.id, band_id, False)
+    query.set_band_state(band_id, 2)
     return redirect(url_for('discover.discover'))
 
 

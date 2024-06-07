@@ -7,24 +7,39 @@ Discover Bands
 {% endblock %}
 
 {% block body %}
-<div class="container">
-    <h2>Discover Bands</h2>
-    {% if matched_bands %}
-        <ul>
-            {% for band in matched_bands %}
-                <li>
-                    <strong>{{ band.band_name }}</strong> - {{ band.band_genre }} (Created on {{ band.creation_date }})
-                    <form action="{{ url_for('discover.confirm_interest', band_id=band.band_id) }}" method="post" style="display:inline;">
-                        <button type="submit" class="btn btn-success">Interested</button>
-                    </form>
-                    <form action="{{ url_for('discover.decline_interest', band_id=band.band_id) }}" method="post" style="display:inline;">
-                        <button type="submit" class="btn btn-danger">Not Interested</button>
-                    </form>
-                </li>
+<div class="text-center" style="border: 3px solid rgb(255, 255, 255); padding: 20px; width: 50%; margin-left: auto; margin-right: auto; margin-top: 3%; height: 70vh; background-color: rgba(0, 0, 0, 0.603);">
+
+    <h1 style="color: white; font-weight: bold;">Discover Bands</h2>
+
+    
+    <div style="display: flex; flex-direction: column; justify-content: space-between; height: 90%;">
+        {% if band %}
+        <div style="border: 2px solid rgb(255, 255, 255); margin: 20px; padding: 20px;">
+            <div style="font-weight: bold; font-size: 1.5em;">{{ band.band_name }}</div>
+            <div style="font-size: 1.2em;">Genre--{{ band.band_genre }}</div>
+            <div style="position: absolute; bottom: 20px; right: 20px;">{{ band.creation_date }}</div>
+            {% for player in players %}
+                <p> {{player.full_name}} -- {{player.instrument}} </p>
             {% endfor %}
-        </ul>
-    {% else %}
-        <p>No new bands to discover at the moment.</p>
+        </div>
+        <div>
+            <table style="width: 100%; margin-top: auto;">
+                <tr>
+                    <td style="text-align: center;">
+                        <form action="{{ url_for('discover.decline_interest', band_id=band.band_id) }}" method="post" style="display:inline;">
+                            <button type="submit" class="btn no-btn" style="border: 3px solid rgb(255, 255, 255); color:white; margin: 10px; width: 100px; height: 50px;">NO</button>
+                        </form>
+                    </td>
+                    <td style="text-align: center;">
+                        <form action="{{ url_for('discover.confirm_interest', band_id=band.band_id) }}" method="post" style="display:inline;">
+                            <button type="submit" class="btn yes-btn" style="border: 3px solid rgb(255, 255, 255); color:white; margin: 10px; width: 100px; height: 50px;">YES</button>
+                        </form>
+                    </td>
+                </tr>
+            </table>
+            
+        </div>
     {% endif %}
+    </div>
 </div>
 {% endblock %}
