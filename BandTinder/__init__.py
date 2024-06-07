@@ -23,12 +23,8 @@ cur = conn.cursor(cursor_factory=RealDictCursor)
 @app.before_request
 def before_request():
     g.user = current_user if current_user.is_authenticated else None
-    if g.user:
-        g.user_name = current_user.user_name
-        g.full_name = current_user.full_name
-    else:
-        g.user_name = None
-        g.full_name = None
+    g.user_name = current_user.user_name if current_user.is_authenticated else None
+    g.full_name = current_user.full_name if current_user.is_authenticated else None
 
 from BandTinder.blueprints.mainpage import mainpage_bp
 from BandTinder.blueprints.loginpage import loginpage_bp
