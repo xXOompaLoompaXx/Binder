@@ -9,7 +9,8 @@ discover_bp = Blueprint("discover", __name__)
 @discover_bp.route('/discover')
 @login_required
 def discover():
-    matched_bands = query.get_uninterested_bands(current_user.id)
+    #Pick random band, then display it.
+    matched_bands = []
     return render_template('discover.html', matched_bands=matched_bands)
 
 @discover_bp.route('/confirm_interest/<int:band_id>', methods=["POST"])
@@ -23,17 +24,5 @@ def confirm_interest(band_id):
 def decline_interest(band_id):
     query.set_user_interest(current_user.id, band_id, False)
     return redirect(url_for('discover.discover'))
-
-
-
-@discover_bp.route('/match_band/<int:band_id>', methods=["POST"])
-@login_required
-def match_band(band_id):
-    band = query.get_pending_band_info(current_user.id, band_id)
-    if band['all_others_interested']:
-        query.finalize_band(current_user.id, band_id, True)
-    else:
-        flash("Not all other users have shown interest yet.")
-    return redirect(url_for('discover.pending_bands'))
 
 

@@ -156,6 +156,16 @@ def get_users_with_prefered_genre(genre):
     return [row["pk"] for row in cur.fetchall()]
 
 
+def get_bands_by_user(user_id):
+    sql = """
+    SELECT B.band_id, B.band_name, B.band_genre, B.creation_date
+    FROM Bands B
+    JOIN Band_contains BC ON B.band_id = BC.band_id
+    WHERE BC.pk = %s AND B.band_state = 1
+    """
+    cur.execute(sql, (user_id,))
+    return cur.fetchall()
+
 def get_users_genre_instrument(genre, instrument):
     sql = """
     SELECT PG.pk
