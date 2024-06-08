@@ -20,38 +20,21 @@ loginpage_bp = Blueprint("loginpage", __name__ )
 
 
 class RegisterForm(FlaskForm):
-    
-
     fullname = StringField(validators=[
                            InputRequired(), Length(min=4, max=20, message='Form of the names is incorrect')], render_kw={"placeholder": "Full name"})
-
-
     email = StringField(validators=[
                            InputRequired(), Length(min=4, max=100, message='Too long or too short')], render_kw={"placeholder": "Email"})
-
-
     birthDate = DateField('Insert date of birth', format='%Y-%m-%d', validators=[DataRequired()])
-
-
     instrument = SelectField('', validators=[DataRequired()], render_kw={"placeholder": "Select instrument"})
-
     genre = SelectField('', validators=[DataRequired()], render_kw={"placeholder": "Select genre"})
-
     proficiency = IntegerField('', validators=[DataRequired(), NumberRange(min=1, max=10)], render_kw={"placeholder": "Select proficiency"})
-
-
     located_in = SelectField('', validators=[DataRequired()], render_kw={"placeholder": "City of residence"})
-
-
     username = StringField(validators=[
                            InputRequired(), Length(min=4, max=20, message='Form of the username is incorrect')], render_kw={"placeholder": "Username"})
-
     password = PasswordField(validators=[
                              InputRequired(), Length(min=8, max=20, message='Form of the password is incorrect')], render_kw={"placeholder": "Password"})
-
     submit = SubmitField('Register')
 
-    
 
 class LoginForm(FlaskForm):
     username = StringField(validators=[

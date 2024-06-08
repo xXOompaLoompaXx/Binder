@@ -6,7 +6,7 @@ import psycopg2
 from psycopg2.extras import RealDictCursor
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'mysecretkey')
+app.config['SECRET_KEY'] = "shrekisverycool"
 
 login_manager = LoginManager(app)
 login_manager.init_app(app)

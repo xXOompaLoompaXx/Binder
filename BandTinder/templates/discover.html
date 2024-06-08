@@ -9,15 +9,15 @@ Discover Bands
 {% block body %}
 <div class="text-center" style="border: 3px solid rgb(255, 255, 255); padding: 20px; width: 50%; margin-left: auto; margin-right: auto; margin-top: 3%; height: 70vh; background-color: rgba(0, 0, 0, 0.603);">
 
-    <h1 style="color: white; font-weight: bold;">Discover Bands</h2>
+    <h1 style="color: white; font-weight: bold;">Matching bands right now</h2>
 
     
     <div style="display: flex; flex-direction: column; justify-content: space-between; height: 90%;">
         {% if band %}
         <div style="border: 2px solid rgb(255, 255, 255); margin: 20px; padding: 20px;">
-            <div style="color: white; font-weight: bold; font-size: 1.5em;">{{ band.band_name }}</div>
-            <div style="color: white; font-size: 1.2em;">Genre--{{ band.band_genre }}</div>
-            <div style="color: white; position: absolute; bottom: 20px; right: 20px;">{{ band.creation_date }}</div>
+            <div style="color: white; font-weight: bold; font-size: 1.5em; letter-spacing: 5px;">{{ band.band_name }}</div>
+            <div style="color: white; font-size: 1.2em; letter-spacing: 5px;">Genre: {{ band.band_genre }}</div>
+            <div style="color: white; letter-spacing: 5px;">{{ band.creation_date }}</div>
             {% for player in players %}
                 <div>
                     <a href = "/profile/{{player.user_name}}" style="color: white;"> {{player.full_name}} -- {{player.instrument}} </a>

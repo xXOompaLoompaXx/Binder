@@ -241,3 +241,84 @@ nav .container-fluid {
 .placeholder-selected {
     color: black; /* Change this to the desired color */
 }
+
+.profile-container {
+    background: rgba(61, 1, 1, 0.88); /* More transparent background */
+    border-radius: 50px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 800px;
+    margin: 80px 0px 20px -150px;
+    padding: 20px;
+    
+    text-align: left;
+}
+
+.profile-header {
+    display: flex;
+    align-items: center;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #eee;
+}
+
+.profile-pic {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-right: 20px;
+}
+
+.profile-header h2 {
+    margin: 0;
+    font-size: 1.8em;
+    color: #B42424; /* Adjusted text color */
+}
+
+.profile-header p {
+    margin: 0;
+    color: #666; /* Adjusted text color */
+}
+
+.profile-details, .profile-bands {
+    padding: 20px 0;
+}
+
+.profile-details h3, .profile-bands h3 {
+    margin-bottom: 10px;
+    font-size: 1.5em;
+    color: #B42424; /* Adjusted text color */
+}
+
+.profile-details p, .profile-bands p, .profile-bands ul {
+    margin: 10px 0;
+    color: #f7f7f7; /* Adjusted text color */
+    letter-spacing: 1.5px;
+}
+
+.profile-bands ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.profile-bands li {
+    background: rgba(30, 1, 1, 0.4); /* More transparent background */
+    margin: 10px 0;
+    padding: 20px;
+    border-radius: 30px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.profile-bands li strong {
+    display: block;
+    font-size: 1.1em;
+}
+
+h2, h3, h4, h5, h6 {
+    font-family: 'Pacifico', cursive;
+    color: #B42424;
+}
+
+a {
+    color: #B42424;
+    text-decoration: none;
+}

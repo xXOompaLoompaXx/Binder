@@ -13,7 +13,7 @@ def user_profile(username):
     if linked_user:
         if current_user.is_authenticated and current_user.user_name == username:
             user_bands = query.get_bands_by_user(current_user.id)
-            return render_template("profiles/profile.html", current_user=current_user, user_bands=user_bands)
+            return render_template("profiles/profile.html", current_user=current_user, linked_user=linked_user, user_bands=user_bands)
         else:
             return render_template("profiles/profile_other.html", username=username, linked_user=linked_user, current_user=current_user)
     else:

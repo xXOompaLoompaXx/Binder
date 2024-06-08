@@ -235,7 +235,7 @@ INSERT INTO Plays (pk, instrument, proficiency) VALUES
 -- Example Band
 
 INSERT INTO bands (band_name, band_genre, band_state, creation_date) VALUES 
-('example-band 1', 'Rock', 0, '2024-06-08');
+('Example Band 1', 'Rock', 0, '2024-06-08');
 
 INSERT INTO band_contains VALUES 
 (10, 1, TRUE),
@@ -244,7 +244,7 @@ INSERT INTO band_contains VALUES
 (7, 1, TRUE);
 
 INSERT INTO bands (band_name, band_genre, band_state, creation_date) VALUES 
-('example-band 2', 'Rock', 0, '2024-06-08');
+('Example Band 2', 'Rock', 0, '2024-06-08');
 
 INSERT INTO band_contains VALUES 
 (13, 2, TRUE),
