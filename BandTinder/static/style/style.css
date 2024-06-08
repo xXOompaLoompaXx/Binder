@@ -3,6 +3,7 @@ body {
     text-align: center;
     margin: 0;
     overflow: hidden; /* Prevents scrolling due to pseudo-element overflow */
+    color: white;
 }
 
 body::before, body::after {

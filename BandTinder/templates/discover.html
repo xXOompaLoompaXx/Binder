@@ -15,11 +15,13 @@ Discover Bands
     <div style="display: flex; flex-direction: column; justify-content: space-between; height: 90%;">
         {% if band %}
         <div style="border: 2px solid rgb(255, 255, 255); margin: 20px; padding: 20px;">
-            <div style="font-weight: bold; font-size: 1.5em;">{{ band.band_name }}</div>
-            <div style="font-size: 1.2em;">Genre--{{ band.band_genre }}</div>
-            <div style="position: absolute; bottom: 20px; right: 20px;">{{ band.creation_date }}</div>
+            <div style="color: white; font-weight: bold; font-size: 1.5em;">{{ band.band_name }}</div>
+            <div style="color: white; font-size: 1.2em;">Genre--{{ band.band_genre }}</div>
+            <div style="color: white; position: absolute; bottom: 20px; right: 20px;">{{ band.creation_date }}</div>
             {% for player in players %}
-                <p> {{player.full_name}} -- {{player.instrument}} </p>
+                <div>
+                    <a href = "/profile/{{player.user_name}}" style="color: white;"> {{player.full_name}} -- {{player.instrument}} </a>
+                </div>
             {% endfor %}
         </div>
         <div>

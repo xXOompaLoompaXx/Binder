@@ -20,29 +20,29 @@ INSERT INTO Genre (genre) VALUES
 
 -- Insert data into Cities
 INSERT INTO Cities (city, coordinates) VALUES
-('New York', '40.7128,-74.0060'),
-('Los Angeles', '34.0522,-118.2437'),
-('Chicago', '41.8781,-87.6298'),
-('Houston', '29.7604,-95.3698'),
-('Miami', '25.7617,-80.1918');
+('København', '40.7128,-74.0060'),
+('Slagelse', '34.0522,-118.2437'),
+('Roskilde', '41.8781,-87.6298'),
+('Odense', '29.7604,-95.3698'),
+('Aarhus', '25.7617,-80.1918');
 
 -- Insert data into Users
 INSERT INTO Users (user_name, full_name, password, birth_date, located_in) VALUES
-('user1', 'John Doe', 'password1', '1990-01-01', 'New York'),
-('user2', 'Jane Smith', 'password2', '1985-05-05', 'Los Angeles'),
-('user3', 'Alice Johnson', 'password3', '1992-09-09', 'Chicago'),
-('user4', 'Bob Brown', 'password4', '1988-03-03', 'Houston'),
-('user5', 'Charlie Davis', 'password5', '1995-12-12', 'Miami'),
-('user6', 'Diana Miller', 'password6', '1991-04-04', 'New York'),
-('user7', 'Ethan Wilson', 'password7', '1989-07-07', 'Los Angeles'),
-('user8', 'Fiona Thomas', 'password8', '1986-02-02', 'Chicago'),
-('user9', 'George Clark', 'password9', '1993-11-11', 'Houston'),
-('user10', 'Hannah Lewis', 'password10', '1994-08-08', 'Miami'),
-('user11', 'Isaac Turner', 'password11', '1990-10-10', 'New York'),
-('user12', 'Julia Adams', 'password12', '1987-01-01', 'Los Angeles'),
-('user13', 'Kevin White', 'password13', '1991-06-06', 'Chicago'),
-('user14', 'Laura Martinez', 'password14', '1989-04-04', 'Houston'),
-('user15', 'Michael Scott', 'password15', '1992-08-08', 'Miami');
+('user1', 'John Doe', 'password1', '1990-01-01', 'København'),
+('user2', 'Jane Smith', 'password2', '1985-05-05', 'Slagelse'),
+('user3', 'Alice Johnson', 'password3', '1992-09-09', 'Roskilde'),
+('user4', 'Bob Brown', 'password4', '1988-03-03', 'Odense'),
+('user5', 'Charlie Davis', 'password5', '1995-12-12', 'Aarhus'),
+('user6', 'Diana Miller', 'password6', '1991-04-04', 'København'),
+('user7', 'Ethan Wilson', 'password7', '1989-07-07', 'Slagelse'),
+('user8', 'Fiona Thomas', 'password8', '1986-02-02', 'Roskilde'),
+('user9', 'George Clark', 'password9', '1993-11-11', 'Odense'),
+('user10', 'Hannah Lewis', 'password10', '1994-08-08', 'Aarhus'),
+('user11', 'Isaac Turner', 'password11', '1990-10-10', 'København'),
+('user12', 'Julia Adams', 'password12', '1987-01-01', 'Slagelse'),
+('user13', 'Kevin White', 'password13', '1991-06-06', 'Roskilde'),
+('user14', 'Laura Martinez', 'password14', '1989-04-04', 'Odense'),
+('user15', 'Michael Scott', 'password15', '1992-08-08', 'Aarhus');
 
 -- Insert data into Plays
 INSERT INTO Plays (pk, instrument, proficiency) VALUES
