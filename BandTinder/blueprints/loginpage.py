@@ -90,6 +90,11 @@ def register():
     form.genre.choices = [(genr, genr) for genr in genres]
     form.located_in.choices = [(cit['city'], cit['city']) for cit in cities]
 
+    genre_instruments_map = {}
+    for genre in genres:
+        genre_instruments_map[genre] = query.get_typical_instrument_for_genre(genre)
+
+
     if form.validate_on_submit():
         username = form.username.data
         if query.get_user_class_by_user_name(username):
@@ -106,4 +111,4 @@ def register():
         
         return redirect("/login")
     
-    return render_template("login/register.html", form=form)
+    return render_template("login/register.html", form=form, genre_instruments_map=genre_instruments_map)

@@ -1,5 +1,5 @@
 # discover.py
-
+from BandTinder.blueprints.matching import loner_fix
 from flask import Blueprint, render_template, redirect, url_for, flash
 from flask_login import login_required, current_user
 import BandTinder.query as query
@@ -24,6 +24,7 @@ def discover():
 @login_required
 def confirm_interest(band_id):
     query.set_user_interest(current_user.id, band_id, True)
+    query.update_bands_match_status()
     return redirect(url_for('discover.discover'))
 
 @discover_bp.route('/decline_interest/<int:band_id>', methods=["POST"])
@@ -31,6 +32,7 @@ def confirm_interest(band_id):
 def decline_interest(band_id):
     query.set_user_interest(current_user.id, band_id, False)
     query.set_band_state(band_id, 2)
+    loner_fix()
     return redirect(url_for('discover.discover'))
 
 

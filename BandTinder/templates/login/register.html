@@ -67,28 +67,31 @@ Register
         {% endwith %}
     </div>
 </div>
-{% endblock %}
-
-document.addEventListener('DOMContentLoaded', function() {
-    var placeholderElements = document.querySelectorAll('.placeholder-style');
-    placeholderElements.forEach(function(element) {
-        element.addEventListener('change', function() {
-            if (this.value === '') {
-                this.classList.add('placeholder-selected');
-            } else {
-                this.classList.remove('placeholder-selected');
-            }
+<script type="text/template" id="genreInstrumentsMapData">
+    {{ genre_instruments_map|tojson }}
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var genreInstrumentsMap = JSON.parse(document.getElementById('genreInstrumentsMapData').textContent);
+        var genreSelect = document.getElementById('genre');
+        var instrumentSelect = document.getElementById('instrument');
+        
+        genreSelect.addEventListener('change', function() {
+            var selectedGenre = genreSelect.value;
+            var instruments = genreInstrumentsMap[selectedGenre] || [];
+            
+            // Clear existing options
+            instrumentSelect.innerHTML = '<option value="" disabled selected>Select instrument</option>';
+            
+            // Add new options
+            instruments.forEach(function(instrument) {
+                var option = document.createElement('option');
+                option.value = instrument;
+                option.textContent = instrument;
+                instrumentSelect.appendChild(option);
+            });
         });
-        element.addEventListener('focus', function() {
-            this.classList.remove('placeholder-selected');
-        });
-        element.addEventListener('blur', function() {
-            if (this.value === '') {
-                this.classList.add('placeholder-selected');
-            }
-        });
-        if (element.value === '') {
-            element.classList.add('placeholder-selected');
-        }
+        
     });
-});
+</script>
+{% endblock %}

@@ -8,7 +8,7 @@ import randomname
 matching_bp = Blueprint("matching", __name__ )
 
 
-def generate_band_for_user(pk):
+def try_generate_band_for_user(pk):
     genre, user_instrument = query.get_user_genre_instrument(pk)
     instruments = query.get_typical_instrument_for_genre(genre)
     instruments.remove(user_instrument)
@@ -45,19 +45,16 @@ def generate_band_for_user(pk):
 
 
 
-def scheduled_task():
+def loner_fix():
     loners =  query.get_lonely_users()
-    print(len(loners))
     for pk in loners:
-        print("found lonely user, making band")
-        print(pk)
-        result = generate_band_for_user(pk)
-        print(f"Band was created: {result}")
+        result = try_generate_band_for_user(pk)
+        print(f"found lonely user: {pk}, making band. Made band: {result}")
         
             
-
+loner_fix()
 scheduler = BackgroundScheduler()
-scheduler.add_job(func=scheduled_task, trigger="interval", seconds=10)
+scheduler.add_job(func=loner_fix, trigger="interval", seconds=10)
 scheduler.start()
 
 @matching_bp.route('/matcher')

@@ -205,8 +205,14 @@ def bands_that_have_all_users_interested(): #Finds all the bands that are matche
     )
     """
     cur.execute(sql)
-    return cur.fetchall()
+    result = [row["band_id"] for row in cur.fetchall()]
+    return result
 
+def update_bands_match_status():
+    bands = bands_that_have_all_users_interested()
+    print(f"res: {bands}")
+    for band_id in bands:
+        set_band_state(band_id, 1)
 
 
 def get_unanswered_bands(user_id):
