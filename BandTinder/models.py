@@ -25,6 +25,7 @@ class User(ModelUserMixin):
     def __init__(self, user_data: Dict):
         super(User, self).__init__(user_data)
         self.pk = user_data.get('pk')
+        self.email = user_data.get('email')
         self.full_name = user_data.get('full_name')
         self.user_name = user_data.get('user_name')
         self.password = user_data.get('password')

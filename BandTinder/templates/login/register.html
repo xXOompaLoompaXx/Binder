@@ -16,6 +16,9 @@ Register
             {{ form.password(class="form-control", placeholder="Password") }}
         </div>
         <div class="form-group">
+            {{ form.email(class="form-control", placeholder="Email") }}
+        </div>
+        <div class="form-group">
             {{ form.fullname(class="form-control", placeholder="Full Name") }}
         </div>
         <div class="form-group">
@@ -75,6 +78,7 @@ Register
         var genreInstrumentsMap = JSON.parse(document.getElementById('genreInstrumentsMapData').textContent);
         var genreSelect = document.getElementById('genre');
         var instrumentSelect = document.getElementById('instrument');
+        var citySelect = document.getElementById('located_in');
         
         genreSelect.addEventListener('change', function() {
             var selectedGenre = genreSelect.value;
@@ -82,7 +86,7 @@ Register
             
             // Clear existing options
             instrumentSelect.innerHTML = '<option value="" disabled selected>Select instrument</option>';
-            
+
             // Add new options
             instruments.forEach(function(instrument) {
                 var option = document.createElement('option');
@@ -90,6 +94,16 @@ Register
                 option.textContent = instrument;
                 instrumentSelect.appendChild(option);
             });
+
+            genreSelect.classList.remove("placeholder-style")
+        });
+
+        instrumentSelect.addEventListener('change', function() {
+            instrumentSelect.classList.remove("placeholder-style")
+        });
+
+        citySelect.addEventListener('change', function() {
+            citySelect.classList.remove("placeholder-style")
         });
         
     });

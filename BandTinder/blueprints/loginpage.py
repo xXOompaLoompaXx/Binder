@@ -1,3 +1,5 @@
+from collections.abc import Sequence
+from typing import Mapping
 from flask import Blueprint, render_template, current_app, url_for, redirect, flash
 import BandTinder.query as query
 import requests
@@ -5,6 +7,8 @@ from flask_login import UserMixin, login_user, LoginManager, login_required, log
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, SelectField, DateField, IntegerField
 from wtforms.validators import InputRequired, Length, ValidationError, DataRequired, NumberRange
+
+import re
 
 from BandTinder import app, login_manager
 from BandTinder.models import User
@@ -20,6 +24,10 @@ class RegisterForm(FlaskForm):
 
     fullname = StringField(validators=[
                            InputRequired(), Length(min=4, max=20, message='Form of the names is incorrect')], render_kw={"placeholder": "Full name"})
+
+
+    email = StringField(validators=[
+                           InputRequired(), Length(min=4, max=100, message='Too long or too short')], render_kw={"placeholder": "Email"})
 
 
     birthDate = DateField('Insert date of birth', format='%Y-%m-%d', validators=[DataRequired()])
@@ -97,11 +105,15 @@ def register():
 
     if form.validate_on_submit():
         username = form.username.data
+        print(f"email: {form.email.data}")
         if query.get_user_class_by_user_name(username):
             flash("This username exists, pick another one")
             return redirect("/register")
         if not form.instrument.data in query.get_typical_instrument_for_genre(form.genre.data):
-            flash("Genre and instrument incompatible") ## LIDT DÅRLIGT MEN OKAY FOR NU 
+            flash("Genre and instrument incompatible") 
+            return redirect("/register")
+        if not re.search(r"[a-zA-Z0-9]*\.?[a-zA-Z0-9]*@[a-zA-Z0-9]+\.[a-zA-Z0-9]+", form.email.data):
+            flash("Emaill syntax not correct") 
             return redirect("/register")
         hashed_password = form.password.data # bcrypt.generate_password_hash(form.password.data).decode('utf-8') 
         name = form.fullname.data

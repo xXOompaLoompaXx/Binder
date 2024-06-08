@@ -32,6 +32,7 @@ CREATE TABLE IF NOT EXISTS Cities(
 -- entities
 CREATE TABLE IF NOT EXISTS Users(
     pk serial not null PRIMARY KEY,
+    email varchar(100) UNIQUE,
     user_name varchar(50) UNIQUE,
     full_name varchar(50),
     password varchar(120),
@@ -88,6 +89,8 @@ CREATE TABLE IF NOT EXISTS Band_contains
 ALTER SEQUENCE users_pk_seq RESTART WITH 1;
 ALTER SEQUENCE bands_band_id_seq RESTART WITH 1;
 
+
+
 --ADD DATA
 
 
@@ -136,34 +139,36 @@ INSERT INTO Cities (city, coordinates) VALUES
 ('Odense', '29.7604,-95.3698'),
 ('Aarhus', '25.7617,-80.1918');
 
+
 -- Insert data into Users
-INSERT INTO Users (user_name, full_name, password, birth_date, located_in) VALUES
-('user1', 'John Doe', 'password1', '1990-01-01', 'København'),
-('user2', 'Jane Smith', 'password2', '1985-05-05', 'Slagelse'),
-('user3', 'Alice Johnson', 'password3', '1992-09-09', 'Roskilde'),
-('user4', 'Bob Brown', 'password4', '1988-03-03', 'Odense'),
-('user5', 'Charlie Davis', 'password5', '1995-12-12', 'Aarhus'),
-('user6', 'Diana Miller', 'password6', '1991-04-04', 'København'),
-('user7', 'Ethan Wilson', 'password7', '1989-07-07', 'Slagelse'),
-('user8', 'Fiona Thomas', 'password8', '1986-02-02', 'Roskilde'),
-('user9', 'George Clark', 'password9', '1993-11-11', 'Odense'),
-('user10', 'Hannah Lewis', 'password10', '1994-08-08', 'Aarhus'),
-('user11', 'Isaac Turner', 'password11', '1990-10-10', 'København'),
-('user12', 'Julia Adams', 'password12', '1987-01-01', 'Slagelse'),
-('user13', 'Kevin White', 'password13', '1991-06-06', 'Roskilde'),
-('user14', 'Laura Martinez', 'password14', '1989-04-04', 'Odense'),
-('user15', 'Michael Scott', 'password15', '1992-08-08', 'Aarhus'),
+INSERT INTO Users (user_name, full_name, password, birth_date, located_in, email) VALUES
+('user1', 'John Doe', 'password1', '1990-01-01', 'København', 'john.doe5@gmail.com'),
+('user2', 'Jane Smith', 'password2', '1985-05-05', 'Slagelse', 'jane.smith7@gmail.com'),
+('user3', 'Alice Johnson', 'password3', '1992-09-09', 'Roskilde', 'alice.johnson9@gmail.com'),
+('user4', 'Bob Brown', 'password4', '1988-03-03', 'Odense', 'bob.brown3@gmail.com'),
+('user5', 'Charlie Davis', 'password5', '1995-12-12', 'Aarhus', 'charlie.davis12@gmail.com'),
+('user6', 'Diana Miller', 'password6', '1991-04-04', 'København', 'diana.miller4@gmail.com'),
+('user7', 'Ethan Wilson', 'password7', '1989-07-07', 'Slagelse', 'ethan.wilson7@gmail.com'),
+('user8', 'Fiona Thomas', 'password8', '1986-02-02', 'Roskilde', 'fiona.thomas2@gmail.com'),
+('user9', 'George Clark', 'password9', '1993-11-11', 'Odense', 'george.clark11@gmail.com'),
+('user10', 'Hannah Lewis', 'password10', '1994-08-08', 'Aarhus', 'hannah.lewis8@gmail.com'),
+('user11', 'Isaac Turner', 'password11', '1990-10-10', 'København', 'isaac.turner10@gmail.com'),
+('user12', 'Julia Adams', 'password12', '1987-01-01', 'Slagelse', 'julia.adams1@gmail.com'),
+('user13', 'Kevin White', 'password13', '1991-06-06', 'Roskilde', 'kevin.white6@gmail.com'),
+('user14', 'Laura Martinez', 'password14', '1989-04-04', 'Odense', 'laura.martinez4@gmail.com'),
+('user15', 'Michael Scott', 'password15', '1992-08-08', 'Aarhus', 'michael.scott8@gmail.com'),
 --More Rock Users
-('user16', 'Oliver Hansen', 'password16', '1990-01-01', 'København'),
-('user17', 'Emma Jensen', 'password17', '1985-05-05', 'Slagelse'),
-('user18', 'Noah Pedersen', 'password18', '1992-09-09', 'Roskilde'),
-('user19', 'William Larsen', 'password19', '1988-03-03', 'Odense'),
-('user20', 'Sophia Nielsen', 'password20', '1995-12-12', 'Aarhus'),
-('user21', 'Isabella Christiansen', 'password21', '1991-04-04', 'København'),
-('user22', 'Liam Andersen', 'password22', '1989-07-07', 'Slagelse'),
-('user23', 'Mia Thomsen', 'password23', '1986-02-02', 'Roskilde'),
-('user24', 'Lucas Sørensen', 'password24', '1993-11-11', 'Odense'),
-('user25', 'Ella Petersen', 'password25', '1994-08-08', 'Aarhus');
+('user16', 'Oliver Hansen', 'password16', '1990-01-01', 'København', 'oliver.hansen1@gmail.com'),
+('user17', 'Emma Jensen', 'password17', '1985-05-05', 'Slagelse', 'emma.jensen5@gmail.com'),
+('user18', 'Noah Pedersen', 'password18', '1992-09-09', 'Roskilde', 'noah.pedersen9@gmail.com'),
+('user19', 'William Larsen', 'password19', '1988-03-03', 'Odense', 'william.larsen3@gmail.com'),
+('user20', 'Sophia Nielsen', 'password20', '1995-12-12', 'Aarhus', 'sophia.nielsen12@gmail.com'),
+('user21', 'Isabella Christiansen', 'password21', '1991-04-04', 'København', 'isabella.christiansen4@gmail.com'),
+('user22', 'Liam Andersen', 'password22', '1989-07-07', 'Slagelse', 'liam.andersen7@gmail.com'),
+('user23', 'Mia Thomsen', 'password23', '1986-02-02', 'Roskilde', 'mia.thomsen2@gmail.com'),
+('user24', 'Lucas Sørensen', 'password24', '1993-11-11', 'Odense', 'lucas.sorensen11@gmail.com'),
+('user25', 'Ella Petersen', 'password25', '1994-08-08', 'Aarhus', 'ella.petersen8@gmail.com');
+
 
 
 -- Insert data into Prefers_Genre
