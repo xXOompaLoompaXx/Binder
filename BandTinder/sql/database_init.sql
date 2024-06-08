@@ -87,3 +87,4 @@ CREATE TABLE IF NOT EXISTS Band_contains
 -- Reset sequences
 ALTER SEQUENCE users_pk_seq RESTART WITH 1;
 ALTER SEQUENCE bands_band_id_seq RESTART WITH 1;
+
