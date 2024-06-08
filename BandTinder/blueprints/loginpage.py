@@ -105,6 +105,7 @@ def register():
 
     if form.validate_on_submit():
         username = form.username.data
+        name = form.fullname.data
         print(f"email: {form.email.data}")
         if query.get_user_class_by_user_name(username):
             flash("This username exists, pick another one")
@@ -112,11 +113,14 @@ def register():
         if not form.instrument.data in query.get_typical_instrument_for_genre(form.genre.data):
             flash("Genre and instrument incompatible") 
             return redirect("/register")
-        if not re.search(r"[a-zA-Z0-9]*\.?[a-zA-Z0-9]*@[a-zA-Z0-9]+\.[a-zA-Z0-9]+", form.email.data):
-            flash("Emaill syntax not correct") 
+        if not re.search(r"[a-zA-Z0-9ÆØÅæøå]*\.?[a-zA-Z0-9ÆØÅæøå]*@[a-zA-ZÆØÅæøå]+\.[a-zA-ZÆØÅæøå]+", form.email.data):
+            flash("Email syntax not correct") 
+            return redirect("/register")
+        if not re.search(r"[A-ZÆØÅ][a-zaæøå]+ ([A-ZÆØÅ][a-zaæøå]+ )*[A-ZÆØÅ][a-zaæøå]+", name):
+            flash("Name is not correct Syntax") 
             return redirect("/register")
         hashed_password = form.password.data # bcrypt.generate_password_hash(form.password.data).decode('utf-8') 
-        name = form.fullname.data
+        
         
 
         query.insert_user(name, username, hashed_password, form.birthDate.data, form.located_in.data, form.instrument.data, form.proficiency.data, form.genre.data)
