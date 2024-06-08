@@ -16,9 +16,7 @@ INSERT INTO Instruments (instrument) VALUES
 INSERT INTO Genre (genre) VALUES
 ('Rock'),
 ('Jazz'),
-('Pop'),
-('Classical'),
-('Hip Hop');
+('Pop');
 
 -- Insert data into Cities
 INSERT INTO Cities (city, coordinates) VALUES
@@ -48,7 +46,7 @@ INSERT INTO Users (user_name, full_name, password, birth_date, located_in) VALUE
 
 -- Insert data into Plays
 INSERT INTO Plays (pk, instrument, proficiency) VALUES
-(1, 'El-Guitar', 8),
+(1, 'Bass', 8),
 (2, 'E-Piano', 7),
 (3, 'Piano', 6),
 (4, 'Drums', 9),
@@ -57,7 +55,7 @@ INSERT INTO Plays (pk, instrument, proficiency) VALUES
 (7, 'Vocals', 6),
 (8, 'Contra-Bass', 7),
 (9, 'Guitar', 5),
-(10, 'Bass', 8),
+(10, 'El-Guitar', 8),
 (11, 'Drums', 7),
 (12, 'Vocals', 8),
 (13, 'El-Guitar', 7),
@@ -97,3 +95,26 @@ INSERT INTO Prefers_Genre (pk, genre) VALUES
 (13, 'Rock'),
 (14, 'Jazz'),
 (15, 'Pop');
+
+
+
+
+-- Example Band
+
+INSERT INTO bands (band_name, band_genre, band_state, creation_date) VALUES 
+('example-band 1', 'Rock', 0, '2024-06-08');
+
+INSERT INTO band_contains VALUES 
+(10, 1, TRUE),
+(4, 1, TRUE),
+(1, 1, NULL),
+(7, 1, TRUE);
+
+INSERT INTO bands (band_name, band_genre, band_state, creation_date) VALUES 
+('example-band 2', 'Rock', 0, '2024-06-08');
+
+INSERT INTO band_contains VALUES 
+(13, 2, TRUE),
+(4, 2, TRUE),
+(1, 2, NULL),
+(7, 2, TRUE);
