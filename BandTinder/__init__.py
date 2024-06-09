@@ -1,4 +1,4 @@
-from flask import Flask, g
+from flask import Flask, g, send_from_directory, request
 from flask_login import current_user, LoginManager
 import os
 import psycopg2
@@ -6,7 +6,7 @@ from psycopg2.extras import RealDictCursor
 from flask_wtf.csrf import CSRFProtect
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = "shrekisverycool"
+app.config['SECRET_KEY'] = "shrekisverycoolaaaaaaaaaaaaaaaaaaaaa"
 
 login_manager = LoginManager(app)
 login_manager.init_app(app)
@@ -22,9 +22,18 @@ cur = conn.cursor(cursor_factory=RealDictCursor)
 
 @app.before_request
 def before_request():
-    g.user = current_user if current_user.is_authenticated else None
-    g.user_name = current_user.user_name if current_user.is_authenticated else None
-    g.full_name = current_user.full_name if current_user.is_authenticated else None
+    if request.endpoint and 'static' not in request.endpoint:
+        g.user = current_user if current_user.is_authenticated else None
+        if g.user:
+            g.user_name = current_user.user_name
+            g.full_name = current_user.full_name
+        else:
+            g.user_name = None
+            g.full_name = None
+
+@app.route('/static/<path:filename>')
+def static_files(filename):
+    return send_from_directory(app.static_folder, filename)
 
 from BandTinder.blueprints.mainpage import mainpage_bp
 from BandTinder.blueprints.loginpage import loginpage_bp

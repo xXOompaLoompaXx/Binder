@@ -18,6 +18,7 @@ def load_user(user_id):
     """)
     cur.execute(user_sql, (int(user_id),))
     user_data = cur.fetchone()
+    
     return User(user_data) if user_data else None
 
 
