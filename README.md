@@ -14,7 +14,7 @@ When all users have said yes to a band suggestion, there is a maatch and a band 
 1. Navigate to root
 2.  Make sure to have python 3.10 (which is what the project is testet on). For this, you can easily create a virtuel environment by using conda: 
 ```
-conda create binder -n python=3.10
+conda create -n binder python=3.10
 ```
 
 3. Install required modules:
