@@ -4,18 +4,19 @@ import os
 import psycopg2
 from psycopg2.extras import RealDictCursor
 from flask_wtf.csrf import CSRFProtect
+from dotenv import load_dotenv
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = "shrekisverycoolaaaaaaaaaaaaaaaaaaaaa"
 
 login_manager = LoginManager(app)
 login_manager.init_app(app)
-
+load_dotenv(dotenv_path="../.env")
 # Database setup
 conn = psycopg2.connect(
-    host="localhost",
-    database="band_tinder",
-    user="postgres",
+    host=os.getenv("DB_HOST"),
+    database=os.getenv("DB_NAME"),
+    user=os.getenv("DB_USER"),
     password=os.getenv("psqlPass")
 )
 cur = conn.cursor(cursor_factory=RealDictCursor)
