@@ -1,0 +1,20 @@
+h2, h3, h4, h5, h6 {
+    font-family: 'Lato', sans-serif;
+    color: #B42424;
+    margin: 0 0 15px 0;
+    padding: 1%;
+    letter-spacing: 2px;
+}
+
+.nav-link {
+    font-weight: 600;
+}
+
+.binder {
+    font-size: 2.4rem; 
+    font-family: 'Pacifico', cursive;
+    color: #B42424; 
+    text-decoration: none;
+    padding: 30px;
+    font-weight: bold;
+}

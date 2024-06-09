@@ -9,7 +9,7 @@ discover_bp = Blueprint("discover", __name__)
 @discover_bp.route('/discover')
 @login_required
 def discover():
-    #Pick random band, then display it.
+    # Pick randomnly compatible band, then display it.
     pk = current_user.pk
     unanswered_bands = query.get_unanswered_bands(pk)
     if len(unanswered_bands) > 0:

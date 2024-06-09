@@ -38,7 +38,7 @@ def try_generate_band_for_user(pk):
         lst = [value for value in dict(row).values()]
         if not query.get_bands_with_player_ids (lst):
             #generate band with players
-            query.make_band((randomname.get_name(adj=('shape','weather','emotions','speed'), noun=('music_instruments')))+'s', genre, lst)
+            query.make_band((randomname.get_name(adj=('shape','weather','emotions','speed'), noun=('music_instruments')).replace('-',' '))+'s', genre, lst)
             return True
     
     return False

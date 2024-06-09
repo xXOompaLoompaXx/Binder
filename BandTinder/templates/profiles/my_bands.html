@@ -1,0 +1,29 @@
+<!-- templates/profiles/my_bands.html -->
+
+{% extends "base.html" %}
+
+{% block title %}
+My Bands
+{% endblock %}
+
+{% block body %}
+<div class="bands-container">
+    {% if user_bands %}
+        {% for band in user_bands %}
+            <div class="band-box fade-in">
+                <h3>{{ band.band_name }}</h3>
+                <p><strong>Genre:</strong> {{ band.band_genre }}</p>
+                <p><strong>Created on:</strong> {{ band.creation_date }}</p>
+                <h4>Members:</h4>
+                <ul>
+                    {% for member in band.members %}
+                        <li><a href="/profile/{{member.user_name}}" class="player-link">{{ member.full_name }} ({{ member.instrument }})</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>You are in no bands yet</p>
+    {% endif %}
+</div>
+{% endblock %}

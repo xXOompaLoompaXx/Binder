@@ -1,24 +1,37 @@
-<!-- templates/profiles/user_bands.html -->
+<!-- templates/profiles/profile.html -->
 
 {% extends "base.html" %}
 
 {% block title %}
-Profile
+{{ linked_user.full_name }}'s Profile
 {% endblock %}
 
 {% block body %}
-<div class="container">
-    <h2>{{ current_user.full_name }}'s Bands</h2>
-    {% if user_bands %}
-        <ul>
-            {% for band in user_bands %}
-                <li>
-                    <strong>{{ band.band_name }}</strong> - {{ band.band_genre }} (Created on {{ band.creation_date }})
-                </li>
-            {% endfor %}
-        </ul>
-    {% else %}
-        <p>You are in no bands yet</p>
-    {% endif %}
+<div class="profile-container fade-in">
+    <div class="profile-header">
+        <img src="{{ url_for('static', filename='images/default_profile.jpg') }}" alt="Profile Picture" class="profile-pic">
+        <h2>{{ linked_user.full_name }}</h2>
+        <p class="user-tag"> @{{ linked_user.user_name }}</p>
+    </div>
+    <div class="profile-details">
+        <h3>Profile Information</h3>
+        <p><strong>Email:</strong> {{ linked_user.email }}</p>
+        <p><strong>Birth Date:</strong> {{ linked_user.birth_date }}</p>
+        <p><strong>Location:</strong> {{ linked_user.located_in }}</p>
+    </div>
+    <div class="profile-bands">
+        <h3>Bands</h3>
+        {% if user_bands %}
+            <ul>
+                {% for band in user_bands %}
+                    <li>
+                        <strong>{{ band.band_name }}</strong> - {{ band.band_genre }} (Created on {{ band.creation_date }})
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>You are in no bands yet</p>
+        {% endif %}
+    </div>
 </div>
 {% endblock %}
