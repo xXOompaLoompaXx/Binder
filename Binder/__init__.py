@@ -12,7 +12,6 @@ app.config['SECRET_KEY'] = "shrekisverycoolaaaaaaaaaaaaaaaaaaaaa"
 login_manager = LoginManager(app)
 login_manager.init_app(app)
 load_dotenv(dotenv_path="../.env", override=False)
-print(os.getenv("psqlPass"))
 # Database setup
 
 conn = psycopg2.connect(
