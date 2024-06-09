@@ -247,7 +247,7 @@ INSERT INTO bands (band_name, band_genre, band_state, creation_date) VALUES
 
 INSERT INTO band_contains VALUES 
 (13, 2, TRUE),
-(4, 2, TRUE),
+(16, 2, TRUE),
 (1, 2, NULL),
-(7, 2, TRUE);
+(18, 2, TRUE);
 
