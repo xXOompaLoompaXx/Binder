@@ -13,11 +13,10 @@ import re
 from BandTinder import app, login_manager
 from BandTinder.models import User
 
-# from flask_bcrypt import Bcrypt
-# bcrypt = Bcrypt(app)
+from flask_bcrypt import Bcrypt
+bcrypt = Bcrypt(app)
 
-loginpage_bp = Blueprint("loginpage", __name__ )
-
+loginpage_bp = Blueprint("loginpage", __name__)
 
 class RegisterForm(FlaskForm):
     fullname = StringField(validators=[
@@ -35,34 +34,26 @@ class RegisterForm(FlaskForm):
                              InputRequired(), Length(min=8, max=20, message='Form of the password is incorrect')], render_kw={"placeholder": "Password"})
     submit = SubmitField('Register')
 
-
 class LoginForm(FlaskForm):
     username = StringField(validators=[
                            InputRequired(), Length(min=4, max=20)], render_kw={"placeholder": "Username"})
-
     password = PasswordField(validators=[
                              InputRequired(), Length(min=8, max=20)], render_kw={"placeholder": "Password"})
-
     submit = SubmitField('Login')
 
-
-@loginpage_bp.route('/login', methods= ["GET", "POST"])
+@loginpage_bp.route('/login', methods=["GET", "POST"])
 def login():
     if current_user.is_authenticated:
-            return redirect("/")
+        return redirect("/")
     form = LoginForm()
-
-
     if form.validate_on_submit():
-        if form.validate_on_submit():
-            user = query.get_user_class_by_user_name(form.username.data)
-            if user and user['password'] == form.password.data: # bcrypt.check_password_hash(user['password'], form.password.data):
-                login_user(user, remember=True)
-                return redirect("/")
-            else:
-                flash("Something Went wrong, please check username and password")
-                return redirect("/login")
-                
+        user = query.get_user_class_by_user_name(form.username.data)
+        if user and bcrypt.check_password_hash(user['password'], form.password.data):
+            login_user(user, remember=True)
+            return redirect("/")
+        else:
+            flash("Something went wrong, please check username and password")
+            return redirect("/login")
     return render_template('login/login.html', form=form)
 
 @loginpage_bp.route('/logout')
@@ -70,10 +61,9 @@ def logout():
     logout_user()
     return redirect("/")
 
-@loginpage_bp.route('/register', methods= ["GET", "POST"])
+@loginpage_bp.route('/register', methods=["GET", "POST"])
 def register():
     form = RegisterForm()
-
     instruments = query.get_instruments()
     genres = query.get_genres()
     cities = query.get_cities()
@@ -85,11 +75,9 @@ def register():
     for genre in genres:
         genre_instruments_map[genre] = query.get_typical_instrument_for_genre(genre)
 
-
     if form.validate_on_submit():
         username = form.username.data
         name = form.fullname.data
-        print(f"email: {form.email.data}")
         if query.get_user_class_by_user_name(username):
             flash("This username exists, pick another one")
             return redirect("/register")
@@ -102,10 +90,8 @@ def register():
         if not re.search(r"[A-ZÆØÅ][a-zaæøå]+ ([A-ZÆØÅ][a-zaæøå]+ )*[A-ZÆØÅ][a-zaæøå]+", name):
             flash("Name is not correct Syntax") 
             return redirect("/register")
-        hashed_password = form.password.data # bcrypt.generate_password_hash(form.password.data).decode('utf-8') 
+        hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
         
-        
-
         query.insert_user(name, username, hashed_password, form.birthDate.data, form.located_in.data, form.instrument.data, form.proficiency.data, form.genre.data)
         
         return redirect("/login")

@@ -7,11 +7,11 @@
 {% endblock %}
 
 {% block body %}
-<div class="profile-container">
+<div class="profile-container fade-in">
     <div class="profile-header">
         <img src="{{ url_for('static', filename='images/default_profile.jpg') }}" alt="Profile Picture" class="profile-pic">
         <h2>{{ linked_user.full_name }}</h2>
-        <p> @{{ linked_user.user_name }}</p>
+        <p class="user-tag"> @{{ linked_user.user_name }}</p>
     </div>
     <div class="profile-details">
         <h3>Profile Information</h3>

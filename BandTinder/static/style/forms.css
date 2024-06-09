@@ -1,0 +1,68 @@
+/* Form container */
+.form-container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 30px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.9); /* Light background for form */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Form input fields */
+.form-control {
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.yes-btn {
+    background-color: rgba(100, 255, 95, 0.5);
+}
+
+.yes-btn:hover {
+    background-color: rgb(0, 128, 0);
+    box-shadow: 0 0 15px rgb(0, 128, 0);
+}
+
+.no-btn {
+    background-color: rgba(255, 0, 0, 0.5);
+}
+
+.no-btn:hover {
+    background-color: rgb(220, 20, 60);
+    box-shadow: 0 0 15px rgb(220, 20, 60);
+}
+
+.btn-submit {
+    background-color: #ff6666;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn-submit:hover {
+    background-color: #ff3333;
+    box-shadow: 0 0 15px #ff3333;
+}
+
+/* Error message */
+.error-message {
+    color: #dc3545;
+    font-size: 14px;
+}
+
+/* Placeholder style for select elements */
+.placeholder-style {
+    color: #999;
+}
+
+.placeholder-selected {
+    color: black; /* Change this to the desired color */
+}

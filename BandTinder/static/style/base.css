@@ -1,0 +1,52 @@
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent background for header */
+    z-index: 1; /* Ensures the header is above the background */
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    z-index: 1; /* Ensures the container is above the background */
+}
+
+body {
+    font-family: 'Lato', sans-serif;
+    text-align: center;
+    margin: 0;
+    color: white;
+    overflow: hidden; /* Prevents scrolling due to pseudo-element overflow */
+}
+
+body::before, body::after {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Ensures the background is behind all other content */
+}
+
+body::before {
+    background-image: url('/static/images/background.jpg'); /* Corrected to use the relative path */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    transform: scale(1.8); /* Start more zoomed in */
+    opacity: 0;
+    animation: fadeInZoomOutBackground 25s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
+}
+
+body::after {
+    background-color: black;
+    opacity: 1;
+    animation: fadeOutBlackOverlay 5s ease-in-out forwards;
+}
+

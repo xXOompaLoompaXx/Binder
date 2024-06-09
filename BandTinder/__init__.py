@@ -1,9 +1,9 @@
-
 from flask import Flask, g
 from flask_login import current_user, LoginManager
 import os
 import psycopg2
 from psycopg2.extras import RealDictCursor
+from flask_wtf.csrf import CSRFProtect
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = "shrekisverycool"
