@@ -24,7 +24,7 @@
 
 .fade-in {
     opacity: 0;
-    animation: fadeIn 3s forwards; /* Adjusted duration for slower fade-in */
+    animation: fadeIn 3s forwards;  
 }
 
 @keyframes fadeIn {
@@ -35,7 +35,7 @@
 
 .zoom-in {
     transform: scale(0.8);
-    animation: zoomIn 3s forwards; /* Adjusted duration for slower zoom-in */
+    animation: zoomIn 3s forwards; 
 }
 
 @keyframes zoomIn {
@@ -45,7 +45,7 @@
 }
 
 .logo.fade-in.zoom-in {
-    animation: fadeInZoomIn 3s forwards; /* Adjusted duration for slower fade-in and zoom-in */
+    animation: fadeInZoomIn 3s forwards;  
 }
 
 @keyframes fadeInZoomIn {

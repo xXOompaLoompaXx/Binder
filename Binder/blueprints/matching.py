@@ -60,7 +60,3 @@ scheduler.start()
 @matching_bp.route('/matcher')
 def matcher():
     pass
-
-# @matching_bp.route('/demo')
-# def demo():
-# scheduled_task()
