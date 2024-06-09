@@ -1,6 +1,6 @@
-# Band_Tinder
-## About Band Tinder
-Band Tinder is a social platform where musicians and music enthusiasts can meet each other by forming bands in a way that is fun and interactive, inspired by how Tinder works. 
+# Binder
+## About Binder
+Binder is a social platform where musicians and music enthusiasts can meet each other by forming bands in a way that is fun and interactive, inspired by how Tinder works. 
 
 First the user creates a profile on the register page, where the user can specify what genre, instrument and proficiency they have. They can then login in and start exploring the app. 
 
@@ -14,7 +14,7 @@ When all users have said yes to a band suggestion, there is a maatch and a band 
 1. Navigate to root
 2.  Make sure to have python 3.10 (which is what the project is testet on). For this, you can easily create a virtuel environment by using conda: 
 ```
-conda create band_tinder -n python=3.10
+conda create binder -n python=3.10
 ```
 
 3. Install required modules:
@@ -22,7 +22,7 @@ conda create band_tinder -n python=3.10
 pip install -r requirements.txt
 ```
 ### Step 2: Setup database
-1. Inside pgadmin create a new database, preferably called "band_tinder".
+1. Inside pgadmin create a new database, preferably called "binder".
 2. In the root, there is a '.env' file, where you should fill in the needed details to connect to your database.
 3. To setup the schema and add data, navigate to the 'Database Init' folder and run:
 ```
@@ -31,7 +31,7 @@ python db_init.py
 Alternatively, you can execute the 'full_init.sql' however you like.
 
 ### Step 3: Run the flask application:
-1. Navigate to the 'BandTinder' folder and run:
+1. Navigate to the 'Binder' folder and run:
 ```
 flask run
 ```
