@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template
 from flask_login import login_required, current_user
-import BandTinder.query as query
+import Binder.query as query
 
 profiles_bp = Blueprint("profiles", __name__)
 

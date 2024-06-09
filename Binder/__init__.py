@@ -39,12 +39,12 @@ def before_request():
 def static_files(filename):
     return send_from_directory(app.static_folder, filename)
 
-from BandTinder.blueprints.mainpage import mainpage_bp
-from BandTinder.blueprints.loginpage import loginpage_bp
-from BandTinder.blueprints.profiles import profiles_bp
-from BandTinder.blueprints.matching import matching_bp
-from BandTinder.blueprints.discover import discover_bp
-from BandTinder.blueprints.browse import browse_bp
+from Binder.blueprints.mainpage import mainpage_bp
+from Binder.blueprints.loginpage import loginpage_bp
+from Binder.blueprints.profiles import profiles_bp
+from Binder.blueprints.matching import matching_bp
+from Binder.blueprints.discover import discover_bp
+from Binder.blueprints.browse import browse_bp
 
 app.register_blueprint(browse_bp)
 app.register_blueprint(discover_bp)

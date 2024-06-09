@@ -1,7 +1,7 @@
 import psycopg2
 from typing import Any, List
-from BandTinder.models import User
-from BandTinder import conn, cur
+from Binder.models import User
+from Binder import conn, cur
 
 
 def query(sql: str, vars: Any = None):

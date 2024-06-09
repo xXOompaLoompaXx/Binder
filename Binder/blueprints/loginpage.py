@@ -1,7 +1,7 @@
 from collections.abc import Sequence
 from typing import Mapping
 from flask import Blueprint, render_template, current_app, url_for, redirect, flash
-import BandTinder.query as query
+import Binder.query as query
 import requests
 from flask_login import UserMixin, login_user, LoginManager, login_required, logout_user, current_user
 from flask_wtf import FlaskForm
@@ -10,8 +10,8 @@ from wtforms.validators import InputRequired, Length, ValidationError, DataRequi
 
 import re
 
-from BandTinder import app, login_manager
-from BandTinder.models import User
+from Binder import app, login_manager
+from Binder.models import User
 
 from flask_bcrypt import Bcrypt
 bcrypt = Bcrypt(app)

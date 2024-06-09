@@ -50,3 +50,9 @@ body::after {
     animation: fadeOutBlackOverlay 5s ease-in-out forwards;
 }
 
+
+.logo {
+    width: 150px;
+    height: auto;
+}
+

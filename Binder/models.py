@@ -1,7 +1,7 @@
 from typing import Dict
 from flask_login import UserMixin
 from psycopg2 import sql
-from BandTinder import login_manager, conn, cur
+from Binder import login_manager, conn, cur
 
 
 class ModelUserMixin(dict, UserMixin):

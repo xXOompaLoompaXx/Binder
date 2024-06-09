@@ -1,8 +1,8 @@
 # discover.py
-from BandTinder.blueprints.matching import loner_fix
+from Binder.blueprints.matching import loner_fix
 from flask import Blueprint, render_template, redirect, url_for, flash
 from flask_login import login_required, current_user
-import BandTinder.query as query
+import Binder.query as query
 
 discover_bp = Blueprint("discover", __name__)
 

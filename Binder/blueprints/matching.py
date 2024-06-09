@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, flash, redirect
 from flask_login import UserMixin, login_user, LoginManager, login_required, logout_user, current_user
-import BandTinder.query as query
+import Binder.query as query
 import requests
 from apscheduler.schedulers.background import BackgroundScheduler
 import randomname
