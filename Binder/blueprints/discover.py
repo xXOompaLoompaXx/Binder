@@ -25,6 +25,7 @@ def discover():
 def confirm_interest(band_id):
     query.set_user_interest(current_user.id, band_id, True)
     query.update_bands_match_status()
+    loner_fix()
     return redirect(url_for('discover.discover'))
 
 @discover_bp.route('/decline_interest/<int:band_id>', methods=["POST"])
