@@ -7,7 +7,7 @@ from flask_wtf.csrf import CSRFProtect
 from dotenv import load_dotenv, find_dotenv
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = "shrekisverycoolaaaaaaaaaaaaaaaaaaaaa"
+app.config['SECRET_KEY'] = "verysecretkey"
 
 login_manager = LoginManager(app)
 login_manager.init_app(app)
