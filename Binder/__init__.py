@@ -14,27 +14,25 @@ login_manager.init_app(app)
 # Database setup
 DATABASE_URL = os.getenv('DATABASE_URL')
 
-if DATABASE_URL:
-    try:
+try:
+    if DATABASE_URL:
         conn = psycopg2.connect(DATABASE_URL, sslmode='require')
-    except Exception as e:
-        print(f"Error connecting to database: {e}")
-else:
-    # Fallback for local development if DATABASE_URL is not set
-    from dotenv import load_dotenv, find_dotenv
-    load_dotenv(dotenv_path="../.env", override=False)
-    
-    try:
+    else:
+        # Fallback for local development if DATABASE_URL is not set
+        from dotenv import load_dotenv, find_dotenv
+        load_dotenv(dotenv_path="../.env", override=False)
+        
         conn = psycopg2.connect(
             host=os.getenv("DB_HOST"),
             database=os.getenv("DB_NAME"),
             user=os.getenv("DB_USER"),
             password=os.getenv("psqlPass")
         )
-    except Exception as e:
-        print(f"Error connecting to database: {e}")
-
-cur = conn.cursor(cursor_factory=RealDictCursor)
+    cur = conn.cursor(cursor_factory=RealDictCursor)
+except Exception as e:
+    print(f"Error connecting to database: {e}")
+    conn = None
+    cur = None
 
 @app.before_request
 def before_request():
