@@ -14,6 +14,9 @@ login_manager.init_app(app)
 # Database setup
 DATABASE_URL = os.getenv('DATABASE_URL')
 
+conn = None
+cur = None
+
 try:
     if DATABASE_URL:
         conn = psycopg2.connect(DATABASE_URL, sslmode='require')
@@ -31,8 +34,6 @@ try:
     cur = conn.cursor(cursor_factory=RealDictCursor)
 except Exception as e:
     print(f"Error connecting to database: {e}")
-    conn = None
-    cur = None
 
 @app.before_request
 def before_request():

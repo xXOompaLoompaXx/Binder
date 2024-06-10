@@ -1,14 +1,14 @@
+# Binder/models.py
 from typing import Dict
 from flask_login import UserMixin
 from psycopg2 import sql
-from Binder import login_manager, conn, cur
-
+from Binder import login_manager
+from Binder.helpers import fetch_one
 
 class ModelUserMixin(dict, UserMixin):
     @property
     def id(self):
         return self.pk
-
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -16,11 +16,9 @@ def load_user(user_id):
     SELECT * FROM Users
     WHERE pk = %s
     """)
-    cur.execute(user_sql, (int(user_id),))
-    user_data = cur.fetchone()
+    user_data = fetch_one(user_sql, (int(user_id),))
     
     return User(user_data) if user_data else None
-
 
 class User(ModelUserMixin):
     def __init__(self, user_data: Dict):
