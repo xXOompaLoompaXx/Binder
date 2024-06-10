@@ -1,17 +1,20 @@
 /* discover.css */
 
 .discover-container {
-    display: grid;
-    place-items: center;
-    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; 
+    height: 100vh;  
     padding: 20px;
     width: 100%;
     box-sizing: border-box;
+    text-align: center;
 }
 
 .discover-inner {
     width: 100%;
-    max-width: 1500px;
+    min-width: 100%;
     display: grid;
     place-items: center;
     padding: 20px;
@@ -28,22 +31,19 @@
 }
 
 .discover-band-box {
-    width: 100%;
+    /* Existing styles */
+    min-width: 50%;  
     min-height: 100%;
-    min-width: 50%;
     background-color: rgba(61, 1, 1, 0.88);
     border-radius: 10px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
     padding: 40px;
     color: white;
     box-sizing: border-box;
-    display: flex;
+    display: flex; 
     flex-direction: column;
     justify-content: space-between;
-}
-
-.player-link {
-    color: white;
+    margin: 0 auto; 
 }
 
 .button-container {
@@ -51,11 +51,12 @@
     justify-content: center;
     margin-top: 20px;
     margin-bottom: 20px;
-    min-width: 50%; 
+    width: 100%; 
+    padding: 0 5%; 
 }
 
 .button-form {
-    margin: 0 10%;
+    margin: 0 4%; 
 }
 
 .button-form button {
@@ -65,7 +66,21 @@
     cursor: pointer;
 }
 
+/* Media query for mobile view */
+@media (min-width: 100%) {
+    .discover-band-box {
+        margin: 0 auto;  
+        padding: 20px;  
+    }
+}
+
+
+
 .no-bands {
     color: white;
     text-align: center;
+}
+
+.player-link {
+    color: white;
 }

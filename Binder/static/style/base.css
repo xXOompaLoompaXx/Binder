@@ -1,3 +1,46 @@
+/* base.css */
+
+/* Global styles */
+body {
+    font-family: 'Lato', sans-serif;
+    text-align: center;
+    margin: 0;
+    color: white;
+    overflow-x: hidden;  
+    overflow-y: auto;  
+    position: relative;
+}
+
+
+/* Logo styles */
+.logo {
+    width: 30%;
+    margin-bottom: 15%;  
+}
+
+.center-logo-container {
+    display: flex;
+    justify-content: center; 
+    align-items: center;   
+    height: 100vh;      
+}
+
+/* Responsive adjustments for mobile */
+@media (max-width: 600px) {
+    .logo {
+        width: 80%;
+        margin-bottom: 35vh; 
+    }
+}
+
+/* Hide overflow on desktop screens */
+@media (min-width: 1024px) {
+    body {
+        overflow: hidden;
+    }
+}
+
+/* Header styles */
 header {
     display: flex;
     justify-content: space-between;
@@ -7,6 +50,7 @@ header {
     z-index: 1; 
 }
 
+/* Container styles */
 .container {
     display: flex;
     flex-direction: column;
@@ -16,14 +60,7 @@ header {
     z-index: 1; 
 }
 
-body {
-    font-family: 'Lato', sans-serif;
-    text-align: center;
-    margin: 0;
-    color: white;
-    overflow: hidden; 
-}
-
+/* Background animations */
 body::before, body::after {
     content: "";
     position: fixed;
@@ -39,7 +76,8 @@ body::before {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    transform: scale(1.8); /* Start more zoomed in */
+    background-attachment: fixed;  
+    transform: scale(1.8); 
     opacity: 0;
     animation: fadeInZoomOutBackground 25s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
 }
@@ -50,3 +88,19 @@ body::after {
     animation: fadeOutBlackOverlay 5s ease-in-out forwards;
 }
 
+/* Responsive adjustments for mobile */
+@media (max-width: 600px) {
+    body {
+        font-size: 14px; 
+    }
+
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .container {
+        width: 100%;
+        padding: 10px;
+    }
+}

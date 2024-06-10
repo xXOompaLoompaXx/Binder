@@ -5,6 +5,7 @@
     justify-content: center;
     gap: 20px;
     margin-top: 20px;
+    margin-bottom: 20vh;
 }
 
 .band-box {
@@ -12,12 +13,12 @@
     background: rgba(61, 1, 1, 0.88); 
     border-radius: 50px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-    width: calc(100% / 2 - 20px); 
-    max-width: 400px;
+    width: 100%;
+    min-width: 35vh;
     margin: 10px;
     padding: 20px;
     text-align: left;
-    color: #fff; 
+    color: #fff;
 }
 
 .band-box h3 {
@@ -42,4 +43,18 @@
 
 .band-box ul li {
     margin: 5px 0;
+}
+
+@media (max-width: 600px) {
+    .band-box {
+        width: 90%;
+        margin: 10px auto;
+        overflow-x: hidden; 
+        overflow-y: auto; 
+    }
+
+    .bands-container {
+        flex-direction: column;
+        align-items: center;
+    }
 }

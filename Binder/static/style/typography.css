@@ -18,3 +18,10 @@ h2, h3, h4, h5, h6 {
     padding: 30px;
     font-weight: bold;
 }
+
+/* Responsive adjustments for mobile */
+@media (max-width: 600px) {
+    .binder {
+        color: #f03434;  
+    }
+}
